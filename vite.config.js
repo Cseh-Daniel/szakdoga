@@ -14,9 +14,9 @@ export default defineConfig({
         }),
         vue(),
     ],
-    resolve:{
-        alias:{
-            '@shared': fileURLToPath(new URL('./resources/js/Shared',import.meta.url)),
+    resolve: {
+        alias: {
+            '@shared': fileURLToPath(new URL('./resources/js/Shared', import.meta.url)),
         }
     }
 });
