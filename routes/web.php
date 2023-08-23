@@ -18,4 +18,6 @@ Route::get('/', function () {
     return inertia("index");
 });
 
-Route::get('/login', [LoginController::class, 'create']);
+Route::get('/login', [LoginController::class, 'index']);
+Route::post('/login', [LoginController::class, 'store']);
+Route::delete('/logout', [LoginController::class, 'destroy']);

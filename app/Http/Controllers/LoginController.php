@@ -6,20 +6,12 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    /**
-     * Display a listing of the users.
+   /**
+     * Show the form for login.
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for login.
-     */
-    public function create()
-    {
-        return inertia('Auth/login');
+       return inertia("Auth/login");
     }
 
     /**
@@ -27,38 +19,15 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd("store method");
     }
 
-    /**
-     * Display the specified user.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
-     * Show the form for editing the specified user.
+     * Logging out the logged in user
      */
-    public function edit(string $id)
+    public function destroy()
     {
-        //
-    }
-
-    /**
-     * Update the specified user in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified user from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        dd("destroy method");
     }
 }
