@@ -1,5 +1,7 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import vue from '@vitejs/plugin-vue';
+import { fileURLToPath } from 'node:url';
 
 export default defineConfig({
     plugins: [
@@ -10,5 +12,11 @@ export default defineConfig({
             ],
             refresh: true,
         }),
+        vue(),
     ],
+    resolve:{
+        alias:{
+            '@shared': fileURLToPath(new URL('./resources/js/Shared',import.meta.url)),
+        }
+    }
 });
