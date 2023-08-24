@@ -1,7 +1,10 @@
 import './bootstrap';
+import '../sass/app.scss';
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import Layout from '@shared/Layout.vue';
+
+// Bootstrap
 
 createInertiaApp({
     resolve: name => {
