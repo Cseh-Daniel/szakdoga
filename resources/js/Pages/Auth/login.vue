@@ -19,20 +19,32 @@ export default {
 
 
 <template>
-    <h2>Bejelentkezés</h2>
+    <div class="d-flex vh-100">
+        <div class="border w-50 m-auto p-3 rounded-5">
+            <h2 class="text-center">Bejelentkezés</h2>
 
-    <form action="#" method="post" @submit.prevent="form.post('/login')">
+            <div class="d-flex justify-content-center">
+                <form class="" action="#" method="post" @submit.prevent="form.post('/login')">
 
-        <label for="email">E-mail:</label>
-        <input type="email" name="email">
+                    <div class="mt-2 mb-3">
+                        <label class="form-label" for="email">Email</label>
+                        <input class="form-control" type="email" name="email">
+                    </div>
 
-        <label for="email">Jelszó</label>
-        <input type="password" name="email">
+                    <div class="mt-2 mb-3">
+                        <label class="form-label" for="password">Jelszó</label>
+                        <input class="form-control" type="password" name="email">
+                    </div>
 
-        <button type="submit">
-            Bejelentkezés
-        </button>
-    </form>
+                    <div class="d-flex flex-row gap-3 p-2 mt-2 align-items-center">
+                        <button class="btn btn-primary" type="submit">
+                            Bejelentkezés
+                        </button>
+                        <Link href="/registration">Regisztráció</Link>
+                    </div>
 
-
+                </form>
+            </div>
+        </div>
+    </div>
 </template>

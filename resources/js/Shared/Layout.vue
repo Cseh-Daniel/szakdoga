@@ -1,3 +1,7 @@
+<script setup>
+
+</script>
+
 <template>
     <!DOCTYPE html>
     <html lang="hu">
@@ -10,13 +14,26 @@
     </Head>
 
     <body>
-        <h1>Layout</h1>
+        <!-- -------------------------------------------------------------------- -->
+        <h3>nav</h3>
+        <div class="d-flex flex-row-reverse gap-3 p-2 align-items-center">
+            <Link href="/registration">Regisztráció</Link>
+            <Link href="/login" as="button" class="btn btn-primary">Bejelentkezés</Link>
+        </div>
+
+        <!-- --------------------------------------------------------------- -->
+        <hr>
         <slot></slot>
+
+        <hr>
+        <!-- --------------------------------------------------------------- -->
+
+        <h3>footer</h3>
+        <!-- --------------------------------------------------------------- -->
+
     </body>
 
     </html>
 </template>
 
-<script setup>
-
-</script>
+<style></style>
