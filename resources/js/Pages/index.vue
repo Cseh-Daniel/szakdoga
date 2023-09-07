@@ -1,6 +1,13 @@
 <template>
     <h1>Welcome</h1>
 
+<div class="alert alert-success">
+    szöveg
+    szöveg
+    szöveg
+    szöveg
+</div>
+
     <!-- kiemelni component-be -->
     <div class="d-flex flex-column justify-content-center shadow-sm w-90 p-3 m-auto rounded-3 border border-top-0">
 
@@ -12,10 +19,6 @@
 
     </div>
 </template>
-
-<script setup>
-
-</script>
 
 
 <style>

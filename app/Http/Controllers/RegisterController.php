@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -11,7 +12,7 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        //
+        return inertia('Auth/register');
     }
 
     /**
@@ -19,7 +20,17 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $credentials=$request->validate([
+            'name'=>['required','min:8'],
+            'email'=>['required','unique:users,email','email'],
+            'password'=>['required','min:8','confirmed']
+        ]);
+
+        User::create($credentials);
+
+        return redirect("/home")->with("reg_ok",'Sikeres regisztráció!');
+
     }
 
     /**

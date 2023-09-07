@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,14 +16,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("/",function(){
-return redirect("home");
+Route::get("/", function () {
+    return redirect("home");
 });
 
 Route::get('/home', function () {
     return inertia("index");
 })->name("home");
 
-Route::get('/login', [LoginController::class, 'index']);
-Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('/logout', [LoginController::class, 'logout']);
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', [LoginController::class, 'index'])->name("login");
+    Route::post('/login', [LoginController::class, 'authenticate']);
+    Route::get('/register',[RegisterController::class,'index']);
+    Route::post('/register',[RegisterController::class,'store']);
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/logout', [LoginController::class, 'logout']);
+});

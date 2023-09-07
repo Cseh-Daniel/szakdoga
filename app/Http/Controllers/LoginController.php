@@ -38,8 +38,8 @@ class LoginController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'Nem található felhasználó a megadott adatokkal.',
-        ])->onlyInput('email');
+            'login' => 'Nem található felhasználó a megadott adatokkal.',
+        ]);
     }
 
     /**

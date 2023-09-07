@@ -17,7 +17,7 @@
         <!-- -------------------------------------------------------------------- -->
         <h3>nav</h3>
         <div v-if="$page.props.auth.user == null" class="d-flex flex-row-reverse gap-3 p-2 align-items-center">
-            <Link href="/registration">Regisztráció</Link>
+            <Link href="/register">Regisztráció</Link>
             <Link href="/login" as="button" class="btn btn-primary">Bejelentkezés</Link>
         </div>
         <div v-else class="d-flex flex-row-reverse gap-3 p-2 align-items-center">
