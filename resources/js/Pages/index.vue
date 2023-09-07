@@ -1,6 +1,11 @@
 <template>
     <h1>Welcome</h1>
 
+    <div class="alert alert-success alert-dismissible">
+        <strong>Success!</strong> Indicates a successful or positive action.
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+</div>
+
 <div class="alert alert-success">
     szöveg
     szöveg
