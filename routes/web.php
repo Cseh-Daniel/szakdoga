@@ -14,10 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return inertia("index");
+Route::get("/",function(){
+return redirect("home");
 });
 
+Route::get('/home', function () {
+    return inertia("index");
+})->name("home");
+
 Route::get('/login', [LoginController::class, 'index']);
-Route::post('/login', [LoginController::class, 'store']);
-Route::delete('/logout', [LoginController::class, 'destroy']);
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);

@@ -4,8 +4,8 @@ import { useForm } from '@inertiajs/vue3';
 
 const form = useForm({
 
-    email: "alma",
-    password: "alma",
+    email: "",
+    password: ""
 
 });
 
@@ -24,16 +24,19 @@ export default {
             <h2 class="text-center">Bejelentkezés</h2>
 
             <div class="d-flex justify-content-center">
-                <form class="" action="#" method="post" @submit.prevent="form.post('/login')">
+                <form action="#" method="post" @submit.prevent="form.post('/login')">
+                    <div v-if="$page.props.errors.login" class="p-3 rounded-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle">
+                        {{ $page.props.errors.email}}
+                    </div>
 
                     <div class="mt-2 mb-3">
                         <label class="form-label" for="email">Email</label>
-                        <input class="form-control" type="email" name="email">
+                        <input class="form-control" type="email" name="email" v-model="form.email">
                     </div>
 
                     <div class="mt-2 mb-3">
                         <label class="form-label" for="password">Jelszó</label>
-                        <input class="form-control" type="password" name="email">
+                        <input class="form-control" type="password" name="password" v-model="form.password">
                     </div>
 
                     <div class="d-flex flex-row gap-3 p-2 mt-2 align-items-center">
