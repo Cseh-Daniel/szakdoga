@@ -14,6 +14,13 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            //author_id -> user_id foreign key
+            //title->varchar(20-25)
+            //text-> varchar(255)
+            //----------
+            //szakterület, szakma vagy profession ID
+
+
         });
     }
 

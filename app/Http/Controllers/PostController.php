@@ -20,7 +20,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return inertia("Posts/newPost");
     }
 
     /**
@@ -28,7 +28,9 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        ddd($request);
+
     }
 
     /**

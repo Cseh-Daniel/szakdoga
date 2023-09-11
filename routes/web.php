@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
@@ -32,5 +33,9 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+
+    Route::resource('/posts',PostController::class);
+
+    // Route::get('/new-post',[PostController::class,'create']);
     Route::post('/logout', [LoginController::class, 'logout']);
 });
