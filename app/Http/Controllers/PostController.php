@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Models\Post;
+use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class PostController extends Controller
 {
@@ -12,13 +15,13 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return inertia('index',['posts'=>Post::with('user')->get()]);
     }
 
     /**
      * Show the form for creating a new post.
      */
-    public function create()
+    public function create() :\Inertia\Response
     {
         return inertia("Posts/newPost");
     }
@@ -26,19 +29,29 @@ class PostController extends Controller
     /**
      * Store a newly created post in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request) : RedirectResponse
     {
+        $post = $request->validate([
+            'title' => ['required','string', 'min:5', 'max:30'],
+            'text' => ['required','string', 'min:10', 'max:250'],
+        ]);
 
-        ddd($request);
+        $post['user_id'] = Auth::user()->id;
+
+        // ddd($post);
+
+        $post=Post::create($post);
+        //  a főoldal helyett a bejegyzés saját oldalára is dobhatna /posts/{id}
+        return redirect("/posts/".$post->id);
 
     }
 
     /**
      * Display the specified post.
      */
-    public function show(Post $post)
+    public function show(Post $post) : \Inertia\Response
     {
-        //
+        return inertia("Posts/showPost",['post'=>$post]);
     }
 
     /**

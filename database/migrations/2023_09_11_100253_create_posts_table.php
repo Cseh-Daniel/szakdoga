@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            //author_id -> user_id foreign key
-            //title->varchar(20-25)
-            //text-> varchar(255)
+            $table->foreignId('user_id')->constrained()->onUpdate('cascade')
+            ->onDelete('cascade');
+            $table->string('title',33);
+            $table->string('text');
             //----------
             //szakterület, szakma vagy profession ID
 

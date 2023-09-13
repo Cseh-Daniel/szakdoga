@@ -21,9 +21,11 @@ Route::get("/", function () {
     return redirect("home");
 });
 
-Route::get('/home', function () {
-    return inertia("index");
-})->name("home");
+Route::get('/home',[PostController::class,'index'])->name("home");
+
+// Route::get('/home', function () {
+//     return inertia("index");
+// })->name("home");
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name("login");

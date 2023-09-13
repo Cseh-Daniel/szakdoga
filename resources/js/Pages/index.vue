@@ -1,26 +1,44 @@
+<script setup>
+
+</script>
+
 <template>
     <h1>Welcome</h1>
 
-    <div class="alert alert-success alert-dismissible">
+    <!-- <div class="alert alert-success alert-dismissible">
         <strong>Success!</strong> Indicates a successful or positive action.
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-</div>
+    </div>
 
-<div class="alert alert-success">
-    szöveg
-    szöveg
-    szöveg
-    szöveg
-</div>
+    <div class="alert alert-success">
+        szöveg
+        szöveg
+        szöveg
+        szöveg
+    </div> -->
 
-    <!-- kiemelni component-be -->
+    <Link href="/posts/create" as="button" class="btn btn-primary p-2 ms-5 mb-3">
+    <i class="bi bi-pen-fill"></i>
+    Bejegyzés írása
+    </Link>
+
+    <!-- kiemelni content list component-be -->
     <div class="d-flex flex-column justify-content-center shadow-sm w-90 p-3 m-auto rounded-3 border border-top-0">
+        <!-- List component?? -->
+        <p class="align-text-bottom border-bottom p-2 rounded-2 shadow-sm fs-4" v-for="post in $page.props.posts">
+        <div class="d-flex flex-row align-items-center justify-content-between">
+            <span class="fs-3">
+               <Link :href="'/posts/'+post.id">
+                {{ post.title }}
+               </Link>
+            </span>
+            <span class="fs-6">
+                {{ post.user.name }}
+            </span>
+        </div>
 
-        <p class="align-text-bottom border-bottom p-2 rounded-2 shadow-sm">content 1</p>
-        <p class="align-text-bottom border-bottom p-2 rounded-2 shadow-sm">content 2</p>
-        <p class="align-text-bottom border-bottom p-2 rounded-2 shadow-sm">content 3</p>
-        <p class="align-text-bottom border-bottom p-2 rounded-2 shadow-sm">content 4</p>
-        <p class="align-text-bottom border-bottom p-2 rounded-2 shadow-sm">content 5</p>
+        {{ post.text }}
+        </p>
 
     </div>
 </template>
