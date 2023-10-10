@@ -8,7 +8,7 @@ console.log(post);
 
 <div class="border p-4 m-5 rounded-2">
     <h2>{{ post.title }}</h2>
-    <p class="fs-5 bg-secondary-subtle p-3 rounded-2">{{ post.text }}</p>
+    <p class="fs-5 p-3 rounded-2">{{ post.text }}</p>
 </div>
 </template>
 
