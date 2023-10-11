@@ -1,10 +1,10 @@
 <script setup>
 
+import indexList from './Posts/indexList.vue';
+
 </script>
 
 <template>
-
-
     <!-- <div class="alert alert-success alert-dismissible">
         <strong>Success!</strong> Indicates a successful or positive action.
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -22,15 +22,19 @@
     Bejegyzés írása
     </Link>
 
+<indexList posts='$page.props.posts'></indexList>
+
     <!-- kiemelni content list component-be -->
-    <div class="d-flex flex-column justify-content-center shadow-sm w-90 p-3 m-auto rounded-3 border border-top-0">
+
+    <!-- <div class="d-flex flex-column justify-content-center shadow-sm w-90 p-3 m-auto rounded-3 border border-top-0"> -->
+
         <!-- List element component?? -->
-        <p class="align-text-bottom border-bottom p-2 rounded-2 shadow-sm fs-4" v-for="post in $page.props.posts">
+        <!-- <p class="align-text-bottom border-bottom p-2 rounded-2 shadow-sm fs-4" v-for="post in $page.props.posts">
         <div class="d-flex flex-row align-items-center justify-content-between">
             <span class="fs-3">
-               <Link :href="'/posts/'+post.id">
+                <Link :href="'/posts/' + post.id">
                 {{ post.title }}
-               </Link>
+                </Link>
             </span>
             <span class="fs-6">
                 {{ post.user.name }}
@@ -38,7 +42,7 @@
         </div>
 
         {{ post.text }}
-        </p>
+        </p> -->
 
     </div>
 </template>
