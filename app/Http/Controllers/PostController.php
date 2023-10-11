@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Models\Post;
+use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -51,6 +52,8 @@ class PostController extends Controller
      */
     public function show(Post $post) : \Inertia\Response
     {
+        $post['author']=User::find($post['user_id'])['name'];
+        // dd($post);
         return inertia("Posts/showPost",['post'=>$post]);
     }
 
