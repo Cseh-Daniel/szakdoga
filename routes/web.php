@@ -23,10 +23,6 @@ Route::get("/", function () {
 
 Route::get('/home',[PostController::class,'index'])->name("home");
 
-// Route::get('/home', function () {
-//     return inertia("index");
-// })->name("home");
-
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name("login");
     Route::post('/login', [LoginController::class, 'authenticate']);
@@ -37,7 +33,5 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
 
     Route::resource('/posts',PostController::class);
-
-    // Route::get('/new-post',[PostController::class,'create']);
     Route::post('/logout', [LoginController::class, 'logout']);
 });
