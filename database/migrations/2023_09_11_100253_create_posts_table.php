@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title',33);
             $table->string('text');
             //----------
+            //diákmunka vagy szakmai gyakorlat boolean
             //szakterület, szakma vagy profession ID
 
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
@@ -34,4 +35,5 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('/posts',PostController::class);
     Route::post('/logout', [LoginController::class, 'logout']);
+    Route::resource('/comments',CommentController::class);
 });

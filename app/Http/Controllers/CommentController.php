@@ -28,7 +28,17 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $comment= $request->validate([
+            'text'=>['required', 'max:250'],
+            'post_id'=>['required']
+        ]);
+        $comment['user_id'] = auth()->user()->id;
+        // dd($comment);
+        $comment=Comment::create($comment);
+        return redirect("/posts/".$comment->post_id);
+
+
     }
 
     /**

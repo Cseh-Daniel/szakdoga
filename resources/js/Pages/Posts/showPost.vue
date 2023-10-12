@@ -11,7 +11,7 @@ const post = usePage().props.post;
         <p class="fs-3 ps-3 pe-3 rounded-2">{{ post.text }}</p>
     </div>
 
-    <commentList></commentList>
+    <commentList :comments="$page.props.comments"></commentList>
 </template>
 
 

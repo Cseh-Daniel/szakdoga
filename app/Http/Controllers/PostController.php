@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Auth;
 use App\Models\Post;
 use App\Models\User;
@@ -16,6 +17,8 @@ class PostController extends Controller
      */
     public function index()
     {
+        $posts=Post::with('user')->get();
+        // ddd($posts);
         return inertia('index',['posts'=>Post::with('user')->get()]);
     }
 
@@ -53,8 +56,8 @@ class PostController extends Controller
     public function show(Post $post) : \Inertia\Response
     {
         $post['author']=User::find($post['user_id'])['name'];
-        // dd($post);
-        return inertia("Posts/showPost",['post'=>$post]);
+        $comments=Comment::byPost($post['id'])->with('user')->get();
+        return inertia("Posts/showPost",['post'=>$post,'comments'=>$comments]);
     }
 
     /**
