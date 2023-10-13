@@ -12,6 +12,13 @@ const form = useForm({
     post_id:`${postId}`
 });
 
+form.defaults();
+
+function formSubmit(){
+    form.post('/comments');
+    form.reset();
+}
+
 </script>
 
 <template>
@@ -25,10 +32,12 @@ const form = useForm({
             <!-- comment element -->
             <div class="ps-3 rounded w-50">
 
-                <form class="mb-4" @submit.prevent="form.post('/comments')">
+                <form class="mb-4" @submit.prevent="formSubmit()">
                     <div class="mb-3">
                         <label for="" class="form-label">Írj hozzászólást</label>
-                        <textarea class="form-control" rows="3" v-model="form.text"></textarea>
+                        <textarea v-if="$page.props.auth.user==null" class="form-control fs-4" rows="3" :disabled="($page.props.auth.user==null)" value="Hozzászóláshoz jelentkezzen be!" />
+                        <textarea v-else class="form-control" rows="3" v-model="form.text"></textarea>
+
                     </div>
                     <button type="submit" class="btn btn-primary">Küldés</button>
                 </form>

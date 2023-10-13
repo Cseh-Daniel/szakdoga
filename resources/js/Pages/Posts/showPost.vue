@@ -12,6 +12,7 @@ const post = usePage().props.post;
     </div>
 
     <commentList :comments="$page.props.comments"></commentList>
+
 </template>
 
 

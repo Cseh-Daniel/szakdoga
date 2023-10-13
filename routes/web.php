@@ -18,22 +18,44 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("/", function () {
-    return redirect("home");
-});
+Route::redirect('/', '/home');
+Route::redirect('/posts', '/home');
 
-Route::get('/home',[PostController::class,'index'])->name("home");
+
+// Route::get(["/","/posts"], function () {
+//     return redirect("home");
+// });
+
+Route::get('/home', [PostController::class, 'index'])->name("home");
+// Route::resource('posts',PostController::class)->only(['show','index']);
+
+// Route::resource('posts', PostController::class)->only([
+//     'index', 'show'
+// ]);
+
+Route::resource('posts', PostController::class, ['only' => ['index', 'show']]);
+
+
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name("login");
     Route::post('/login', [LoginController::class, 'authenticate']);
-    Route::get('/register',[RegisterController::class,'index']);
-    Route::post('/register',[RegisterController::class,'store']);
+    Route::get('/register', [RegisterController::class, 'index']);
+    Route::post('/register', [RegisterController::class, 'store']);
 });
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::resource('/posts',PostController::class);
+    // Route::resource('/posts',PostController::class);
+
+    // Route::resources(['posts'=>PostController::class],['except'=>'show']);
+    // Route::resource('/posts',PostController::class)->except(['show','index']);
+    // Route::resource('/posts',PostController::class)->only(['create']);
+
+    Route::resource('posts', PostController::class, ['except' => ['index', 'show']]);
+    // ->only([        'create', 'store', 'update', 'destroy'/    ]);
+
+
     Route::post('/logout', [LoginController::class, 'logout']);
-    Route::resource('/comments',CommentController::class);
+    Route::resource('/comments', CommentController::class);
 });

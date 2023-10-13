@@ -17,8 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts=Post::with('user')->get();
-        // ddd($posts);
+
         return inertia('index',['posts'=>Post::with('user')->get()]);
     }
 
@@ -27,6 +26,7 @@ class PostController extends Controller
      */
     public function create() :\Inertia\Response
     {
+        dd('create posts');
         return inertia("Posts/newPost");
     }
 
@@ -65,7 +65,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        dd('edit post');
     }
 
     /**
@@ -83,4 +83,5 @@ class PostController extends Controller
     {
         //
     }
+
 }
