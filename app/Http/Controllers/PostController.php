@@ -12,12 +12,17 @@ use Illuminate\Http\RedirectResponse;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['show','index']);
+    }
+
     /**
      * Display a listing of the post.
      */
     public function index()
     {
-
         return inertia('index',['posts'=>Post::with('user')->get()]);
     }
 
@@ -26,7 +31,6 @@ class PostController extends Controller
      */
     public function create() :\Inertia\Response
     {
-        dd('create posts');
         return inertia("Posts/newPost");
     }
 
@@ -65,7 +69,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        dd('edit post');
+
+        // web.php-ban bekell állítani hogy az edit függvényre 404-et adjon
+        dd('edit post',$post);
     }
 
     /**
@@ -73,7 +79,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        dd('update post',$post,$request);
     }
 
     /**
@@ -81,7 +87,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        dd('destroy post',$post);
     }
 
 }

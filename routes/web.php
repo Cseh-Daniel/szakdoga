@@ -21,19 +21,12 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', '/home');
 Route::redirect('/posts', '/home');
 
-
-// Route::get(["/","/posts"], function () {
-//     return redirect("home");
-// });
-
 Route::get('/home', [PostController::class, 'index'])->name("home");
-// Route::resource('posts',PostController::class)->only(['show','index']);
 
-// Route::resource('posts', PostController::class)->only([
-//     'index', 'show'
-// ]);
+    Route::resource('posts', PostController::class);
 
-Route::resource('posts', PostController::class, ['only' => ['index', 'show']]);
+    // Route::resource('posts', PostController::class)->only(['show','index']);
+    // Route::resource('posts', PostController::class)->except(['store', 'create','update','destroy','edit']);
 
 
 
@@ -51,8 +44,13 @@ Route::middleware(['auth'])->group(function () {
     // Route::resources(['posts'=>PostController::class],['except'=>'show']);
     // Route::resource('/posts',PostController::class)->except(['show','index']);
     // Route::resource('/posts',PostController::class)->only(['create']);
+    // Route::resource('posts', PostController::class);
+    // Route::resource('posts', PostController::class)->except(['index', 'show']);
+    // Route::resource('posts', PostController::class)->only(['store', 'create','update','destroy','edit']);
+    // Route::resource('posts', PostController::class)->only(['create']);
 
-    Route::resource('posts', PostController::class, ['except' => ['index', 'show']]);
+
+    // Route::resource('posts', PostController::class, ['except' => ['index', 'show']]);
     // ->only([        'create', 'store', 'update', 'destroy'/    ]);
 
 
