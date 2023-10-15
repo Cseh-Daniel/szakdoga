@@ -39,10 +39,8 @@ class PostController extends Controller
      */
     public function store(Request $request) : RedirectResponse
     {
-        $post = $request->validate([
-            'title' => ['required','string', 'min:5', 'max:30'],
-            'text' => ['required','string', 'min:10', 'max:250'],
-        ]);
+
+        $post = $request->validate(Post::$createRules);
 
         $post['user_id'] = Auth::user()->id;
 
@@ -59,8 +57,8 @@ class PostController extends Controller
      */
     public function show(Post $post) : \Inertia\Response
     {
-        $post['author']=User::find($post['user_id'])['name'];
         $comments=Comment::byPost($post['id'])->with('user')->get();
+        $post['author']=User::find($post['user_id'])['name'];
         return inertia("Posts/showPost",['post'=>$post,'comments'=>$comments]);
     }
 
@@ -80,6 +78,10 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         dd('update post',$post,$request);
+        $req = $request->validate(Post::$updateRules);
+        $post['text']=$req['text'];
+        $post->save();
+        return redirect("/posts/".$post->id);
     }
 
     /**
@@ -87,7 +89,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        dd('destroy post',$post);
+        $post->delete();
     }
 
 }
