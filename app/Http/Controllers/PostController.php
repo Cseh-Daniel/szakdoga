@@ -2,14 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Auth;
 use App\Models\Post;
+use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['show','index']);
+    }
+
     /**
      * Display a listing of the post.
      */
@@ -51,7 +59,9 @@ class PostController extends Controller
      */
     public function show(Post $post) : \Inertia\Response
     {
-        return inertia("Posts/showPost",['post'=>$post]);
+        $post['author']=User::find($post['user_id'])['name'];
+        $comments=Comment::byPost($post['id'])->with('user')->get();
+        return inertia("Posts/showPost",['post'=>$post,'comments'=>$comments]);
     }
 
     /**
@@ -59,7 +69,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+
+        // web.php-ban bekell állítani hogy az edit függvényre 404-et adjon
+        dd('edit post',$post);
     }
 
     /**
@@ -67,7 +79,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        dd('update post',$post,$request);
     }
 
     /**
@@ -75,6 +87,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        dd('destroy post',$post);
     }
+
 }

@@ -11,18 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->string('title',33);
+            $table->foreignId('post_id')->constrained()->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->string('text');
-            //----------
-            //diákmunka vagy szakmai gyakorlat boolean
-            //szakterület, szakma vagy profession ID
-
-
+            $table->timestamps();
         });
     }
 
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('comments');
     }
 };
