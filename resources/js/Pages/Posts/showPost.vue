@@ -4,6 +4,8 @@ import { usePage } from '@inertiajs/vue3';//?? -> $page.props
 import { useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 const post = usePage().props.post;//?? -> $page.props
+const uname=usePage().props.auth.user.username;
+const editable=uname==post.author;
 
 const form = useForm({
     text: `${post.text}`
@@ -28,7 +30,7 @@ function editPost() {
             <textarea class="form-control" rows="3" v-model="form.text" placeholder="Szöveg"></textarea>
             <button type="submit" class="btn btn-primary">Mentés</button>
         </form>
-        <button class="btn btn-outline-secondary btn-sm" @click="isEditing = !isEditing">Szerkesztés</button>
+        <button v-if="editable" class="btn btn-outline-secondary btn-sm" @click="isEditing = !isEditing">Szerkesztés</button>
     </div>
     <!-- <button class="btn btn-primary" @click="editPost()">szerkesztés {{ post.id }}</button> -->
 
