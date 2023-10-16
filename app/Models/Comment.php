@@ -10,6 +10,11 @@ class Comment extends Model
 {
     use HasFactory;
 
+    public static $createRules=[
+        'text'=>['required', 'max:250'],
+        'post_id'=>['required'],
+    ];
+
     protected $fillable=[
         "text",
         "user_id",

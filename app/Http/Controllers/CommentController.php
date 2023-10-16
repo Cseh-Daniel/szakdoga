@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use Auth;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -29,10 +30,9 @@ class CommentController extends Controller
     public function store(Request $request)
     {
 
-        $comment= $request->validate([
-            'text'=>['required', 'max:250'],
-            'post_id'=>['required']
-        ]);
+        //link change to /posts/{id}/comment
+        $comment= $request->validate(Comment::$createRules);
+
         $comment['user_id'] = auth()->user()->id;
         // dd($comment);
         $comment=Comment::create($comment);

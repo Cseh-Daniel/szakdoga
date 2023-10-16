@@ -15,6 +15,7 @@ class Post extends Model
     ];
     public static $updateRules=[
                     'text' => ['required','string', 'min:10', 'max:250'],
+
     ];
 
     protected $fillable=[

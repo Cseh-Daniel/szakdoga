@@ -15,7 +15,7 @@ class PostController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except(['show','index']);
+        $this->middleware('auth')->except(['show', 'index']);
     }
 
     /**
@@ -23,13 +23,13 @@ class PostController extends Controller
      */
     public function index()
     {
-        return inertia('index',['posts'=>Post::with('user')->get()]);
+        return inertia('index', ['posts' => Post::with('user')->get()]);
     }
 
     /**
      * Show the form for creating a new post.
      */
-    public function create() :\Inertia\Response
+    public function create(): \Inertia\Response
     {
         return inertia("Posts/newPost");
     }
@@ -37,7 +37,7 @@ class PostController extends Controller
     /**
      * Store a newly created post in storage.
      */
-    public function store(Request $request) : RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
 
         $post = $request->validate(Post::$createRules);
@@ -46,30 +46,30 @@ class PostController extends Controller
 
         // ddd($post);
 
-        $post=Post::create($post);
+        $post = Post::create($post);
         //  a főoldal helyett a bejegyzés saját oldalára is dobhatna /posts/{id}
-        return redirect("/posts/".$post->id);
-
+        return redirect("/posts/" . $post->id);
     }
 
     /**
      * Display the specified post.
      */
-    public function show(Post $post) : \Inertia\Response
+    public function show(Post $post): \Inertia\Response
     {
-        $comments=Comment::byPost($post['id'])->with('user')->get();
-        $post['author']=User::find($post['user_id'])['name'];
-        return inertia("Posts/showPost",['post'=>$post,'comments'=>$comments]);
+        $comments = Comment::byPost($post['id'])->with('user')->get();
+        $post['author'] = User::find($post['user_id'])['name'];
+        return inertia("Posts/showPost", ['post' => $post, 'comments' => $comments]);
     }
 
     /**
      * Show the form for editing the specified post.
      */
-    public function edit(Post $post)
+    public function edit(/*Post $post*/)
     {
 
         // web.php-ban bekell állítani hogy az edit függvényre 404-et adjon
-        dd('edit post',$post);
+        // dd('edit post',$post);
+        abort(404);
     }
 
     /**
@@ -77,11 +77,13 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        dd('update post',$post,$request);
-        $req = $request->validate(Post::$updateRules);
-        $post['text']=$req['text'];
-        $post->save();
-        return redirect("/posts/".$post->id);
+        if ($post->user_id == auth()->user()->id) {
+            // dd('update post', $post, $request);
+            $req = $request->validate(Post::$updateRules);
+            $post['text'] = $req['text'];
+            $post->save();
+            return redirect("/posts/" . $post->id);
+        }
     }
 
     /**
@@ -91,5 +93,4 @@ class PostController extends Controller
     {
         $post->delete();
     }
-
 }
