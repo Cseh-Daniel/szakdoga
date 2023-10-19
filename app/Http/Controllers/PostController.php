@@ -39,12 +39,14 @@ class PostController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // ddd($request);
+        // $request->validate(['a'=>['nullable']]);
 
         $post = $request->validate(Post::$createRules);
+        // ddd($post);
 
         $post['user_id'] = Auth::user()->id;
 
-        // ddd($post);
 
         $post = Post::create($post);
         //  a főoldal helyett a bejegyzés saját oldalára is dobhatna /posts/{id}
@@ -78,6 +80,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         if ($post->user_id == auth()->user()->id) {
+
             // dd('update post', $post, $request);
             $req = $request->validate(Post::$updateRules);
             $post['text'] = $req['text'];
@@ -91,6 +94,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        dd($post);
         $post->delete();
     }
 }

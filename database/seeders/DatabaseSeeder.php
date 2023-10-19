@@ -18,5 +18,31 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@user.com',
         ]);
+
+        $counties=['Bács-Kiskun',
+        'Baranya',
+        'Békés',
+        'Borsod-Abaúj-Zemplén',
+        'Csongrád-Csanád',
+        'Fejér',
+        'Győr-Moson-Sopron',
+        'Hajdú-Bihar',
+        'Heves',
+        'Jász-Nagykun-Szolnok',
+        'Komárom-Esztergom',
+        'Nógrád',
+        'Pest',
+        'Somogy',
+        'Szabolcs-Szatmár-Bereg',
+        'Tolna',
+        'Vas',
+        'Veszprém',
+        'Zala',];
+
+        foreach($counties as $county){
+            \App\Models\County::create(['name'=>$county]);
+        }
+
+
     }
 }

@@ -20,7 +20,23 @@ return new class extends Migration
             $table->string('text');
             //----------
             //diákmunka vagy szakmai gyakorlat boolean
-            //szakterület, szakma vagy profession ID
+            $table->boolean('trainee');// 0 -> student job, 1 -> trainee
+            //szakterület
+            $table->string('profession');
+            //mikor
+            $table->string('year');
+            //remote
+            $table->boolean('remote')->nullable();
+            //mennyi ideig
+            //String vagy válaszható lista
+            $table->string('duration');
+            //cég
+            $table->string('company');
+            // //hol -> város
+            // $table->string('city');
+            //     // $table->foreignId('city_id')->constrained()->onUpdate('cascade')
+            //     // ->onDelete('cascade');
+
 
 
         });

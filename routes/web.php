@@ -18,17 +18,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//delete comments and post
+//userpage password change ?profpic?
+
+//besides the main text of the post:
+//when(post), where(cities), remote?(post),
+//student or trainee(post), profession(post)
+
 Route::redirect('/', '/home');
 Route::redirect('/posts', '/home');
 
 Route::get('/home', [PostController::class, 'index'])->name("home");
 
     Route::resource('posts', PostController::class);
-
-    // Route::resource('posts', PostController::class)->only(['show','index']);
-    // Route::resource('posts', PostController::class)->except(['store', 'create','update','destroy','edit']);
-
-
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name("login");
@@ -38,22 +40,6 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-
-    // Route::resource('/posts',PostController::class);
-
-    // Route::resources(['posts'=>PostController::class],['except'=>'show']);
-    // Route::resource('/posts',PostController::class)->except(['show','index']);
-    // Route::resource('/posts',PostController::class)->only(['create']);
-    // Route::resource('posts', PostController::class);
-    // Route::resource('posts', PostController::class)->except(['index', 'show']);
-    // Route::resource('posts', PostController::class)->only(['store', 'create','update','destroy','edit']);
-    // Route::resource('posts', PostController::class)->only(['create']);
-
-
-    // Route::resource('posts', PostController::class, ['except' => ['index', 'show']]);
-    // ->only([        'create', 'store', 'update', 'destroy'/    ]);
-
-
     Route::post('/logout', [LoginController::class, 'logout']);
     Route::resource('/comments', CommentController::class);
 });

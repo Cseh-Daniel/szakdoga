@@ -45,16 +45,28 @@ namespace App\Models{
  * @property int $user_id
  * @property string $title
  * @property string $text
+ * @property int $trainee
+ * @property string $profession
+ * @property string $year
+ * @property int|null $remote
+ * @property string $duration
+ * @property string $company
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|Post newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Post newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Post query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereCompany($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereDuration($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereProfession($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereRemote($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereTrainee($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereYear($value)
  */
 	class Post extends \Eloquent {}
 }
