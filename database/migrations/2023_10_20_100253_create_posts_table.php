@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->string('title', 33);
-            $table->string('text');
+            $table->string('title', 61);
+            $table->string('text',3000);
 
             $table->boolean('trainee');
 

@@ -1,7 +1,6 @@
 <script setup>
-import tags from './tags.vue';
+import tagList from './tagList.vue';
 const props = defineProps(['posts']);
-
 </script>
 
 <template>
@@ -19,9 +18,9 @@ const props = defineProps(['posts']);
                     {{ post.user.name }}
                 </span>
             </div>
-            <tags :post="post"/>
-            <p class="align-text-bottom border-bottom p-2 rounded-2 shadow-sm fs-4 text-break">
-                {{ post.text }}
+            <tagList :post="post"/>
+            <p class="align-text-bottom border-bottom py-3 px-5 rounded-2 shadow-sm fs-4 text-break">
+                {{ post.text.substr(0,150) }}...
             </p>
         </div>
 

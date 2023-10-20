@@ -76,6 +76,7 @@ namespace App\Models{
  * @property-read \App\Models\County $county
  * @property-read \App\Models\Profession $profession
  * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Post byProfession(int $id)
  * @method static \Illuminate\Database\Eloquent\Builder|Post newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Post newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Post query()

@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
     use HasFactory;
 
     public static $createRules = [
-        'title' => ['required', 'string', 'min:5', 'max:30'],
-        'text' => ['required', 'string', 'min:10', 'max:250'],
+        'title' => ['required', 'string', 'min:5', 'max:60'],
+        'text' => ['required', 'string', 'min:10', 'max:3000'],
         'trainee' => ['required', 'boolean'],
         'profession_id' => ['required','exists:professions,id'],
         'county_id'=>['required','exists:counties,id'],
@@ -23,7 +24,7 @@ class Post extends Model
     ];
 
     public static $updateRules = [
-        'text' => ['required', 'string', 'min:10', 'max:250'],
+        'text' => ['required', 'string', 'min:10', 'max:3000'],
     ];
 
     protected $fillable = [
@@ -38,6 +39,15 @@ class Post extends Model
         'duration',
         'company',
     ];
+
+    protected $hidden=[
+        'user_id',
+    ];
+
+    public function scopeByProfession(Builder $query, int $id): void{
+        $query->where('profession_id',$id);
+
+    }
 
     public function user()
     {

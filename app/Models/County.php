@@ -9,6 +9,11 @@ class County extends Model
 {
     use HasFactory;
 
+    protected $visible = [
+        'id',
+        'name'
+    ];
+
     public function posts()
     {
         return $this->hasMany(Post::class);

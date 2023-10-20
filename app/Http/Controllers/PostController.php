@@ -25,7 +25,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return inertia('index', ['posts' => Post::with('user')->get()]);
+        return inertia('index', ['posts' => Post::with('user')->with('profession')->with('county')->get()]);
     }
 
     /**
@@ -57,10 +57,15 @@ class PostController extends Controller
     /**
      * Display the specified post.
      */
-    public function show(Post $post): \Inertia\Response
+    // public function show(Post $post): \Inertia\Response
+
+    public function show(int $id): \Inertia\Response
     {
+        $post=Post::with('user')->with('profession')->with('county')->find($id);
+
         $comments = Comment::byPost($post['id'])->with('user')->get();
-        $post['author'] = User::find($post['user_id'])['name'];
+        // ddd($post);
+        // $post['author'] = User::find($post['user_id'])['name'];
         return inertia("Posts/showPost", ['post' => $post, 'comments' => $comments]);
     }
 
@@ -80,6 +85,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         if ($post->user_id == auth()->user()->id) {
+            // dd("update van if ágban");
 
             // dd('update post', $post, $request);
             $req = $request->validate(Post::$updateRules);

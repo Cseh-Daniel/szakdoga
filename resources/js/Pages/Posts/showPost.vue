@@ -4,12 +4,12 @@ import { usePage } from '@inertiajs/vue3';//?? -> $page.props
 import { useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
-import tags from './tags.vue';
+import tagList from './tagList.vue';
 import deleteModal from './deleteModal.vue';
 
 const post = usePage().props.post;//?? -> $page.props
 const uname = usePage().props.auth.user.username;
-const editable = uname == post.author;
+const editable = uname == post.user.name;
 
 const form = useForm({
     text: `${post.text}`
@@ -26,13 +26,16 @@ function editPost() {
 
 <template>
     <div class="border p-4 m-5 rounded-2">
-        <div class="fs-5"><u>{{ $page.props.post.author }}</u></div>
+        <div class="fs-5"><u>{{ $page.props.post.user.name }}</u></div>
         <h1>{{ $page.props.post.title }}</h1>
-        <tags :post="$page.props.post" />
-        <p v-if="!isEditing" class="fs-3 ps-3 pe-3 rounded-2">{{ $page.props.post.text }}</p>
+        <tagList :post="$page.props.post" />
+
+
+          <textarea readonly v-if="!isEditing" class="fs-5 rounded-2 form-control mb-2 p-4" rows="10">{{ $page.props.post.text }}</textarea>
+        <!-- <p v-if="!isEditing" class="fs-5 rounded-2">{{ $page.props.post.text }}</p> -->
 
         <form class="mb-2" v-else @submit.prevent="editPost()">
-            <textarea class="form-control mb-1" rows="3" v-model="form.text" placeholder="Szöveg"></textarea>
+            <textarea class="form-control mb-1 fs-5 p-4" rows="10" v-model="form.text" placeholder="Szöveg"></textarea>
             <button type="submit" class="btn btn-sm btn-primary">Mentés</button>
         </form>
         <div class="d-flex gap-2">
