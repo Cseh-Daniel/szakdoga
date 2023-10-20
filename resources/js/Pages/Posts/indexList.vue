@@ -11,7 +11,7 @@ const props = defineProps(['posts']);
         <div v-for="post in props.posts">
             <div class="d-flex flex-row align-items-center justify-content-between">
                 <span class="fs-3">
-                    <Link :href="'/posts/' + post.id">
+                    <Link class="text-black text-decoration-none fw-bold" :href="'/posts/' + post.id">
                     {{ post.title }}
                     </Link>
                 </span>

@@ -39,10 +39,29 @@ class DatabaseSeeder extends Seeder
         'Veszprém',
         'Zala',];
 
+        $professions=['Agrár',
+        'Államtudományi',
+        'Bölcsészettudomány',
+        'Gazdaságtudományok',
+        'Hitéleti',
+        'Informatika',
+        'Jogi',
+        'Műszaki',
+        'Művészet',
+        'Művészetközvetítés',
+        'Orvos- és egészségtudomány',
+        'Pedagógusképzés',
+        'Sporttudomány',
+        'Társadalomtudomány',
+        'Természettudomány',];
+
         foreach($counties as $county){
             \App\Models\County::create(['name'=>$county]);
         }
 
+        foreach($professions as $profession){
+            \App\Models\Profession::create(['name'=>$profession]);
+        }
 
     }
 }

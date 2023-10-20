@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use Auth;
 use App\Models\Post;
+use App\Models\Profession;
+use App\Models\County;
 use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
@@ -31,7 +33,7 @@ class PostController extends Controller
      */
     public function create(): \Inertia\Response
     {
-        return inertia("Posts/newPost");
+        return inertia("Posts/newPost",['professions'=>Profession::all(['id','name']),'counties'=>County::all(['id','name'])]);
     }
 
     /**
@@ -39,15 +41,14 @@ class PostController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $durationType=['óra','nap','hét','hónap'];
         // ddd($request);
-        // $request->validate(['a'=>['nullable']]);
-
         $post = $request->validate(Post::$createRules);
-        // ddd($post);
 
         $post['user_id'] = Auth::user()->id;
 
-
+        $post['duration']=$post['duration']." ".$durationType[$post['durationType']];
+        // dd($post);
         $post = Post::create($post);
         //  a főoldal helyett a bejegyzés saját oldalára is dobhatna /posts/{id}
         return redirect("/posts/" . $post->id);
@@ -66,11 +67,10 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified post.
      */
-    public function edit(/*Post $post*/)
+    public function edit()
     {
 
-        // web.php-ban bekell állítani hogy az edit függvényre 404-et adjon
-        // dd('edit post',$post);
+        // 404 error response
         abort(404);
     }
 
@@ -94,7 +94,10 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        dd($post);
-        $post->delete();
+        // dd($post);
+        if ($post->user_id == auth()->user()->id) {
+            $post->delete();
+        }
+        return redirect('home');
     }
 }

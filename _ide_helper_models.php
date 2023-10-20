@@ -37,6 +37,27 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\County
+ *
+ * @property int $id
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Post> $posts
+ * @property-read int|null $posts_count
+ * @method static \Illuminate\Database\Eloquent\Builder|County newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|County newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|County query()
+ * @method static \Illuminate\Database\Eloquent\Builder|County whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|County whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|County whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|County whereUpdatedAt($value)
+ */
+	class County extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Post
  *
  * @property int $id
@@ -46,20 +67,24 @@ namespace App\Models{
  * @property string $title
  * @property string $text
  * @property int $trainee
- * @property string $profession
+ * @property int $profession_id
  * @property string $year
  * @property int|null $remote
  * @property string $duration
  * @property string $company
+ * @property int $county_id
+ * @property-read \App\Models\County $county
+ * @property-read \App\Models\Profession $profession
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|Post newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Post newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Post query()
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereCompany($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereCountyId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereDuration($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Post whereProfession($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereProfessionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereRemote($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereTitle($value)
@@ -69,6 +94,27 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereYear($value)
  */
 	class Post extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Profession
+ *
+ * @property int $id
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Post> $posts
+ * @property-read int|null $posts_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Profession newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Profession newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Profession query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Profession whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Profession whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Profession whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Profession whereUpdatedAt($value)
+ */
+	class Profession extends \Eloquent {}
 }
 
 namespace App\Models{

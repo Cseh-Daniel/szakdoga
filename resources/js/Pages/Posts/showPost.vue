@@ -38,8 +38,7 @@ function editPost() {
         <div class="d-flex gap-2">
             <button v-if="editable" class="btn btn-outline-secondary btn-sm"
                 @click="isEditing = !isEditing">Szerkesztés</button>
-            <deleteModal/>
-            <Link as="button" :href="$page.props.post.id" method="delete" v-if="editable" class="btn btn-danger btn-sm">Törlés</Link>
+            <deleteModal v-if="editable" :editable="editable" />
         </div>
     </div>
 

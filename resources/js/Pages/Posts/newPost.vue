@@ -1,19 +1,32 @@
 
 <script setup>
 import { useForm } from '@inertiajs/vue3';
+import { ref } from 'vue';
 
 const form = useForm({
 
     title: '',
     text: '',
-    profession: '',
+    profession_id: '',
     year: '',
     duration: '',
+    durationType:'',
     company: '',
     trainee: '',
-    remote:null,
+    remote: '',
+    county_id: ''
 
 });
+// let duration = ref('');
+// let durationType = ref('');
+
+function saveForm() {
+
+    // form.duration = duration.value + " " + durationType.value;
+
+    form.post('/posts');
+}
+
 </script>
 
 <template>
@@ -21,7 +34,7 @@ const form = useForm({
 
     <div class="d-flex flex-column justify-content-center shadow-sm w-90 p-3 m-auto rounded-3 border border-top-0">
 
-        <form @submit.prevent="form.post('/posts')">
+        <form @submit.prevent="saveForm">
 
             <!-- form input component -->
             <div class="my-2">
@@ -43,39 +56,79 @@ const form = useForm({
             <!-- //----------------------------------------------------- -->
             <div class="d-flex gap-2 my-2">
 
-<div>
-                    <input required class="form-control" type="text" v-model="form.profession" placeholder="Szakterület">
+                <div>
+                    <!-- <input required class="form-control" type="text" v-model="form.profession" placeholder="Szakterület"> -->
+
+                    <div class="mb-2">
+                        <label class="form-label">Szakterület</label>
+                        <select v-model="form.profession_id" class="form-select form-select-lg">
+                            <option value='' selected disabled>Válaszon</option>
+                            <option v-for="profession in $page.props.professions" :value="profession.id">
+                                {{ profession.name }}
+                            </option>
+                        </select>
+                    </div>
+
                     <div v-if="$page.props.errors.profession"
                         class="p-1 rounded-bottom-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle">
                         {{ $page.props.errors.profession }}
                     </div>
-</div>
+                </div>
 
-<div>
+                <div>
+                    <!-- <input required class="form-control" type="text" v-model="form.profession" placeholder="Szakterület"> -->
+
+                    <div class="mb-2">
+                        <label class="form-label">Megye</label>
+                        <select v-model="form.county_id" class="form-select form-select-lg">
+                            <option value="" selected :disabled="true">Válaszon</option>
+                            <option v-for="county in $page.props.counties" :value="county.id">{{ county.name }}</option>
+                        </select>
+                    </div>
+
+                    <div v-if="$page.props.errors.county"
+                        class="p-1 rounded-bottom-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle">
+                        {{ $page.props.errors.county }}
+                    </div>
+                </div>
+
+                <div class="mb-2">
+                    <label class="form-label">Mikor</label>
                     <input required class="form-control" type="text" v-model="form.year" placeholder="Év">
                     <div v-if="$page.props.errors.year"
                         class="p-1 rounded-bottom-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle">
                         {{ $page.props.errors.year }}
                     </div>
-</div>
+                </div>
 
-<div>
-                    <input required class="form-control" type="text" v-model="form.duration"
-                        placeholder="Mennyi ideig tartott?">
+                <div>
+                    <label class="form-label">Hossza</label>
+                    <div class="input-group">
+                        <input required class="form-control w-50" type="text" v-model="form.duration"
+                            placeholder="Mennyi ideig tartott?">
+                        <select required v-model="form.durationType" class="form-control w-auto">
+                            <option value="" selected disabled>Válaszon</option>
+                            <option value="0">óra</option>
+                            <option value="1">nap</option>
+                            <option value="2">hét</option>
+                            <option value="3">hónap</option>
+
+                        </select>
+                    </div>
                     <div v-if="$page.props.errors.duration"
                         class="p-1 rounded-bottom-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle">
                         {{ $page.props.errors.duration }}
                     </div>
-</div>
+                </div>
 
-<div>
+                <div>
+                    <label class="form-label">Hol</label>
                     <input required class="form-control" type="text" v-model="form.company" placeholder="Cég / munkáltató">
                     <div v-if="$page.props.errors.company"
                         class="p-1 rounded-bottom-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle">
                         {{ $page.props.errors.company }}
                     </div>
-</div>
-
+                </div>
 
             </div>
 
@@ -92,6 +145,7 @@ const form = useForm({
                         {{ $page.props.errors.trainee }}
                     </div>
                 </div>
+
                 <div>
                     <label for="" class="form-label">Távmunka lehetőség</label>
                     <select required v-model="form.remote" class="form-select form-select-lg">
