@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', '/home');
 Route::redirect('/posts', '/home');
 
+Route::get('/posts/filter',[FilterController::class,'index']);
+
 Route::prefix('/posts/filter')->group(function () {
     // /posts/filter?profession_id=9&trainee=true&county_id=5
     Route::get('/profession/{id}', [FilterController::class, 'filterByProfession']);

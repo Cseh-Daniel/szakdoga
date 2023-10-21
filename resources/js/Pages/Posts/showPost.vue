@@ -8,7 +8,12 @@ import tagList from './tagList.vue';
 import deleteModal from './deleteModal.vue';
 
 const post = usePage().props.post;//?? -> $page.props
-const uname = usePage().props.auth.user.username;
+let uname="";
+if (usePage().props.auth.user != null) {
+    uname = usePage().props.auth.user.username
+}else{
+    uname='guest';
+}
 const editable = uname == post.user.name;
 
 const form = useForm({
@@ -31,7 +36,8 @@ function editPost() {
         <tagList :post="$page.props.post" />
 
 
-          <textarea readonly v-if="!isEditing" class="fs-5 rounded-2 form-control mb-2 p-4" rows="10">{{ $page.props.post.text }}</textarea>
+        <textarea readonly v-if="!isEditing" class="fs-5 rounded-2 form-control mb-2 p-4"
+            rows="10">{{ $page.props.post.text }}</textarea>
         <!-- <p v-if="!isEditing" class="fs-5 rounded-2">{{ $page.props.post.text }}</p> -->
 
         <form class="mb-2" v-else @submit.prevent="editPost()">

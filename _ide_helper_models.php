@@ -76,7 +76,12 @@ namespace App\Models{
  * @property-read \App\Models\County $county
  * @property-read \App\Models\Profession $profession
  * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Post byColId(string $col, int $id)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post byCounty(int $id)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post byJobType(bool $type)
  * @method static \Illuminate\Database\Eloquent\Builder|Post byProfession(int $id)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post byRemote(?bool $type)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post byYear(?int $yearMin = null, ?int $yearMax = null)
  * @method static \Illuminate\Database\Eloquent\Builder|Post newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Post newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Post query()
