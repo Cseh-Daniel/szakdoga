@@ -15,7 +15,7 @@ function filterPosts(name,value) {
 <template>
     <div class="d-flex my-1 gap-1 fs-5">
         <div v-if="post.trainee" class="text-black-50 badge bg-info tagLink" @click="filterPosts('jobType',post.trainee)">
-            Gyakorlat / Gyakornok {{ post.trainee }}
+            Gyakorlat / Gyakornok
         </div>
         <div v-else class="text-black-50 badge bg-info tagLink" @click="filterPosts('jobType',post.trainee)">
             Diákmunka

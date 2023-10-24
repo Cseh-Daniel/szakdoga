@@ -48,7 +48,7 @@ class FilterController extends Controller
                     break;
 
                 default:
-                    $posts = $posts->all();
+                    return redirect("/home");
                     break;
             }
         }
@@ -61,7 +61,7 @@ class FilterController extends Controller
 
         // return inertia('index', ['posts' => $posts->with('user')->with('profession')->with('county')->paginate(3)]);
 
-            return $this->showPosts($posts);
+        return $this->showPosts($posts);
     }
 
     public function filterByJobType(Boolean $type)

@@ -1,26 +1,26 @@
 <script setup>
-
+import { router } from '@inertiajs/vue3';
 import indexList from './Posts/indexList.vue';
+
+//kigyűjtjük a meglevő filtereket
+let query=new URLSearchParams(window.location.search);
+//hozzáadjuk az új filter/sortot
+
+function sort(){
+query.append("profession",6);
+router.get("/posts/filter",query);
+}
 
 </script>
 
 <template>
-    <!-- <div class="alert alert-success alert-dismissible">
-        <strong>Success!</strong> Indicates a successful or positive action.
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    </div>
 
-    <div class="alert alert-success">
-        szöveg
-        szöveg
-        szöveg
-        szöveg
-    </div> -->
-
-    <Link href="/posts/create" as="button" class="btn btn-primary p-2 mb-3">
+    <Link href="/posts/create" as="button" class="btn btn-primary p-2 mb-3 me-2">
     <i class="bi bi-pen-fill"></i>
     Bejegyzés írása
     </Link>
+
+    <button class="btn btn-warning p-2 mb-3" @click="sort()">teszt</button>
 
 <indexList :posts="$page.props.posts.data"></indexList>
 
