@@ -22,7 +22,7 @@ import indexList from './Posts/indexList.vue';
     Bejegyzés írása
     </Link>
 
-<indexList :posts="$page.props.posts"></indexList>
+<indexList :posts="$page.props.posts.data"></indexList>
 
 </template>
 

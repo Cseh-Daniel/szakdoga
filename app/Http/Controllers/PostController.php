@@ -8,12 +8,14 @@ use App\Models\Post;
 use App\Models\Profession;
 use App\Models\County;
 use App\Models\User;
+use App\Traits\PostListTrait;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
 class PostController extends Controller
 {
+    use PostListTrait;
 
     public function __construct()
     {
@@ -25,7 +27,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        return inertia('index', ['posts' => Post::with('user')->with('profession')->with('county')->get()]);
+
+        // return inertia('index', ['posts' => Post::with('user')->with('profession')->with('county')->paginate(7)]);
+        return $this->showPosts();
     }
 
     /**
@@ -33,7 +37,7 @@ class PostController extends Controller
      */
     public function create(): \Inertia\Response
     {
-        return inertia("Posts/newPost",['professions'=>Profession::all(['id','name']),'counties'=>County::all(['id','name'])]);
+        return inertia("Posts/newPost", ['professions' => Profession::all(['id', 'name']), 'counties' => County::all(['id', 'name'])]);
     }
 
     /**
@@ -41,13 +45,13 @@ class PostController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $durationType=['óra','nap','hét','hónap'];
+        $durationType = ['óra', 'nap', 'hét', 'hónap'];
         // ddd($request);
         $post = $request->validate(Post::$createRules);
 
         $post['user_id'] = Auth::user()->id;
 
-        $post['duration']=$post['duration']." ".$durationType[$post['durationType']];
+        $post['duration'] = $post['duration'] . " " . $durationType[$post['durationType']];
         // dd($post);
         $post = Post::create($post);
         //  a főoldal helyett a bejegyzés saját oldalára is dobhatna /posts/{id}
@@ -61,7 +65,7 @@ class PostController extends Controller
 
     public function show(int $id): \Inertia\Response
     {
-        $post=Post::with('user')->with('profession')->with('county')->find($id);
+        $post = Post::with('user')->with('profession')->with('county')->find($id);
 
         $comments = Comment::byPost($post['id'])->with('user')->get();
         // ddd($post);

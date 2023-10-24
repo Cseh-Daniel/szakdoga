@@ -3,14 +3,65 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Traits\PostListTrait;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\Boolean;
 
 class FilterController extends Controller
 {
+    use PostListTrait;
 
-    public function index(){
+    public function index(Request $request)
+    { //sorting még kelleni fog
+        $queryString = $request->collect();
+        $posts = Post::query();
 
+        foreach ($queryString as $key => $value) {
+
+            switch ($key) {
+                case 'yearMin':
+                    $posts = $posts->byYear($value);
+                    break;
+
+                case 'yearMax':
+                    $posts = $posts->byYear(0, $value);
+                    break;
+
+                case 'inYear':
+                    $posts = $posts->where('year', $value);
+                    break;
+
+                case 'remote':
+                    $posts = $posts->byRemote($value);
+                    break;
+
+                case 'jobType':
+                    $posts = $posts->byJobType($value);
+                    break;
+
+                case 'county':
+                    $posts = $posts->byCounty($value);
+                    break;
+
+                case 'profession':
+                    $posts = $posts->byProfession($value);
+                    break;
+
+                default:
+                    $posts = $posts->all();
+                    break;
+            }
+        }
+
+
+        // if (isset($queryString['adat'])) {
+        //     dd('adat: ' . $queryString['adat']);
+        // }
+        // return $posts;
+
+        // return inertia('index', ['posts' => $posts->with('user')->with('profession')->with('county')->paginate(3)]);
+
+            return $this->showPosts($posts);
     }
 
     public function filterByJobType(Boolean $type)

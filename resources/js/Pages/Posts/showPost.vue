@@ -7,7 +7,7 @@ import { ref } from 'vue';
 import tagList from './tagList.vue';
 import deleteModal from './deleteModal.vue';
 
-const post = usePage().props.post;//?? -> $page.props
+const post = usePage().props.post;
 let uname="";
 if (usePage().props.auth.user != null) {
     uname = usePage().props.auth.user.username

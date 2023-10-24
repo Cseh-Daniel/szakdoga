@@ -84,10 +84,10 @@ class Post extends Model
             $query->whereBetween('year', $years);
 
         } else if ($yearMin != null) {
-            $query->where('year', '>', $yearMin);
+            $query->where('year', '>=', $yearMin);
 
         } else if ($yearMax != null) {
-            $query->where('year', '<', $yearMax);
+            $query->where('year', '<=', $yearMax);
         }
     }
 
