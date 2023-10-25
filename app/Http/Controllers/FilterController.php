@@ -5,18 +5,35 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Traits\PostListTrait;
 use Illuminate\Http\Request;
-use phpDocumentor\Reflection\Types\Boolean;
 
 class FilterController extends Controller
 {
     use PostListTrait;
 
     public function index(Request $request)
-    { //sorting még kelleni fog
-        $queryString = $request->collect();
+    {
+        //sorting még kelleni fog
+
+        $filters = $request->validate([
+            'yearMin' => ['nullable', 'integer', 'min:2000', 'max:2025'],
+            'yearMax' => ['nullable', 'integer', 'min:2000', 'max:2025'],
+            'inYear' => ['nullable', 'integer', 'min:2000', 'max:2025'],
+            'remote' => ['nullable', 'bool'],
+            'jobType' => ['nullable', 'bool'],
+            'county' => ['nullable', 'exists:counties,id'],
+            'profession' => ['nullable', 'exists:professions,id']
+        ]);
+
+        // $sort = $request->validate([
+        //     'sort'=>['nullable','integer','min:0','max:3']
+        // ]);
+
+        // $sort= $this->isSorted($request);
+        // $sort= $this->isSorted();
+
         $posts = Post::query();
 
-        foreach ($queryString as $key => $value) {
+        foreach ($filters as $key => $value) {
 
             switch ($key) {
                 case 'yearMin':
@@ -35,7 +52,7 @@ class FilterController extends Controller
                     $posts = $posts->byRemote($value);
                     break;
 
-                case 'jobType':
+                case 'jobType': //trainee
                     $posts = $posts->byJobType($value);
                     break;
 
@@ -53,39 +70,6 @@ class FilterController extends Controller
             }
         }
 
-
-        // if (isset($queryString['adat'])) {
-        //     dd('adat: ' . $queryString['adat']);
-        // }
-        // return $posts;
-
-        // return inertia('index', ['posts' => $posts->with('user')->with('profession')->with('county')->paginate(3)]);
-
         return $this->showPosts($posts);
-    }
-
-    public function filterByJobType(Boolean $type)
-    {
-    }
-
-    public function filterByRemote()
-    {
-    }
-
-    public function filterByCounty()
-    {
-    }
-
-    public function filterByProfession(int $prof_id)
-    {
-        //ellenörzés get változók alapján és query-k adogatása egymásnak.
-        // /posts/filter?profession_id=9&trainee=true&county_id=5
-        // query string a $request->param vagy $request->input('param') link:
-        //      https://laracasts.com/discuss/channels/laravel/get-url-query-parameters
-        return inertia('index', ['posts' => Post::byRemote(null)->with('user')->with('profession')->with('county')->get()]);
-    }
-
-    public function filterByYear()
-    {
     }
 }
