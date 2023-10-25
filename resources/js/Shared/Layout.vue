@@ -1,4 +1,5 @@
 <script setup>
+import navBar from './navBar.vue';
 
 </script>
 
@@ -14,15 +15,16 @@
     </Head>
 
     <body>
+        <nav-bar></nav-bar>
         <!-- -----------------------------navbarba componentbe külön szedni--------------------------------------- -->
 
-        <div class="d-flex flex-row my-2 border-bottom">
+        <!-- <div class="d-flex flex-row my-2 border-bottom">
             <div class="me-auto p-2">
                 <Link href="/" class="link-dark link-underline link-underline-opacity-0">
                 <h3>Student Jobs</h3>
                 </Link>
             </div>
-            <!-- login component? -->
+
             <div v-if="$page.props.auth.user == null"
                 class="p-2">
                 <Link href="/login" as="button" class="btn btn-primary">Bejelentkezés</Link>
@@ -35,7 +37,9 @@
                 Kijelentkezés
                 </Link>
             </div>
-        </div>
+        </div> -->
+
+
 
 
         <!-- --------------------------------------------------------------- -->
@@ -46,9 +50,9 @@
 
         <!-- --------------------------------------------------------------- -->
 
-       <div class="d-flex justify-content-center ">
-         <p class="text-muted"><sub>Made for students</sub></p>
-       </div>
+        <div class="d-flex justify-content-center ">
+            <p class="text-muted"><sub>Made for students</sub></p>
+        </div>
         <!-- --------------------------------------------------------------- -->
 
     </body>

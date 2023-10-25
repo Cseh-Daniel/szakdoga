@@ -12,7 +12,6 @@ class FilterController extends Controller
 
     public function index(Request $request)
     {
-        //sorting még kelleni fog
 
         $filters = $request->validate([
             'yearMin' => ['nullable', 'integer', 'min:2000', 'max:2025'],
@@ -21,15 +20,9 @@ class FilterController extends Controller
             'remote' => ['nullable', 'bool'],
             'jobType' => ['nullable', 'bool'],
             'county' => ['nullable', 'exists:counties,id'],
-            'profession' => ['nullable', 'exists:professions,id']
+            'profession' => ['nullable', 'exists:professions,id'],
+            'title' => ['nullable']
         ]);
-
-        // $sort = $request->validate([
-        //     'sort'=>['nullable','integer','min:0','max:3']
-        // ]);
-
-        // $sort= $this->isSorted($request);
-        // $sort= $this->isSorted();
 
         $posts = Post::query();
 
@@ -52,7 +45,7 @@ class FilterController extends Controller
                     $posts = $posts->byRemote($value);
                     break;
 
-                case 'jobType': //trainee
+                case 'jobType':
                     $posts = $posts->byJobType($value);
                     break;
 
@@ -62,6 +55,10 @@ class FilterController extends Controller
 
                 case 'profession':
                     $posts = $posts->byProfession($value);
+                    break;
+
+                case 'title':
+                    $posts = $posts->where('title', 'like', "%" . $value . "%");
                     break;
 
                 default:
