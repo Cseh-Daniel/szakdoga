@@ -24,7 +24,7 @@ function sorter() {
     <div class="d-flex justify-content-center">
         <searchBar></searchBar>
     </div>
-    <div class="d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center justify-content-between w-90 mx-auto">
         <Link href="/posts/create" as="button" class="btn btn-primary p-2 h-50 mb-3 me-2">
         <i class="bi bi-pen-fill"></i>
         Bejegyzés írása
