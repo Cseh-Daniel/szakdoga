@@ -15,6 +15,10 @@ class Comment extends Model
         'post_id'=>['required'],
     ];
 
+    public static $updateRules=[
+        'text'=>['required', 'max:250']
+    ];
+
     protected $fillable=[
         "text",
         "user_id",

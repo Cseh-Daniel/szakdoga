@@ -1,39 +1,53 @@
 <script setup>
 import { ref } from 'vue';
-import { usePage } from '@inertiajs/vue3';
-const props = defineProps(['name', 'id']);
+import { router } from '@inertiajs/vue3';
 
-let uname="";
-if (usePage().props.auth.user != null) {
-    uname = usePage().props.auth.user.username
-}else{
-    uname='guest';
+const props = defineProps(['name', 'comment']);
+
+import { isEditable } from '../../Shared/isEditable';
+
+const editable = isEditable(props.comment.user.name);
+
+
+let deleteComment = ref(false);
+
+let isEditing = ref(false);
+
+function showDelete() {
+    deleteComment.value = !deleteComment.value;
+    console.log(deleteComment.value);
 }
-const editable = uname == props.name;
 
+function showEdit() {
+    isEditing.value = !isEditing.value;
+}
 
-let del = ref(false);
-
-function delClick() {
-    del.value = !del.value;
-    console.log(del.value);
+function updateComment() {
+    showEdit();
+    router.put('/comments/' + props.comment.id,{text:props.comment.text});
 }
 
 </script>
 
 <template>
     <div class="pt-2 border-bottom">
-        <span class="fw-bold fs-5">{{ props.name }}:
+        <span class="fw-bold fs-5">{{ props.comment.user.name }}:
         </span>
-        <p class="fs-4">
-            <slot></slot>
+        <p v-if="!isEditing" class="fs-4">
+            {{ props.comment.text }}
         </p>
-
-        <div class="d-flex gap-2">
-            <button v-if="editable" class="btn btn-outline-danger btn-sm" @click="delClick()"><i
-                    class="bi bi-trash"></i></button>
-
-            <Link v-if="del" as="button" class="btn btn-danger btn-sm" method="delete" :href="'/comments/'+props.id">Törlés</Link>
+        <div v-else class="m-2">
+            <textarea v-model="props.comment.text" class="form-control fs-4"></textarea>
+            <button class="btn btn-primary btn-sm" @click="updateComment()">Mentés<i class="bi bi-save"></i></button>
         </div>
 
-    </div></template>
+        <div v-if="editable" class="d-flex gap-2">
+            <button class="btn btn-outline-primary btn-sm" @click="showEdit()"><i class="bi bi-pencil"></i></button>
+            <button class="btn btn-outline-danger btn-sm" @click="showDelete()"><i class="bi bi-trash"></i></button>
+            <Link v-if="deleteComment" as="button" class="btn btn-danger btn-sm" method="delete"
+                :href="'/comments/' + props.comment.id">Törlés
+            </Link>
+        </div>
+
+    </div>
+</template>

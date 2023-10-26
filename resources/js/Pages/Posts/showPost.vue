@@ -6,15 +6,20 @@ import { ref } from 'vue';
 
 import tagList from './tagList.vue';
 import deleteModal from './deleteModal.vue';
+import {isEditable} from '../../Shared/isEditable.js';
+
 
 const post = usePage().props.post;
-let uname="";
-if (usePage().props.auth.user != null) {
-    uname = usePage().props.auth.user.username
-}else{
-    uname='guest';
-}
-const editable = uname == post.user.name;
+
+// let authName="";
+// if (usePage().props.auth.user != null) {
+//     authName = usePage().props.auth.user.username
+// }else{
+//     authName='guest';
+// }
+// const editable = authName == post.user.name;
+
+const editable = isEditable(post.user.name);
 
 const form = useForm({
     text: `${post.text}`
@@ -27,9 +32,12 @@ function editPost() {
     isEditing = ref(false);
 }
 
+
+
 </script>
 
 <template>
+
     <div class="border p-4 m-5 rounded-2">
         <div class="fs-5"><u>{{ $page.props.post.user.name }}</u></div>
         <h1>{{ $page.props.post.title }}</h1>
@@ -38,7 +46,6 @@ function editPost() {
 
         <textarea readonly v-if="!isEditing" class="fs-5 rounded-2 form-control mb-2 p-4"
             rows="10">{{ $page.props.post.text }}</textarea>
-        <!-- <p v-if="!isEditing" class="fs-5 rounded-2">{{ $page.props.post.text }}</p> -->
 
         <form class="mb-2" v-else @submit.prevent="editPost()">
             <textarea class="form-control mb-1 fs-5 p-4" rows="10" v-model="form.text" placeholder="Szöveg"></textarea>
@@ -55,3 +62,8 @@ function editPost() {
 </template>
 
 
+<style>
+.readArea{
+    border: none;
+}
+</style>

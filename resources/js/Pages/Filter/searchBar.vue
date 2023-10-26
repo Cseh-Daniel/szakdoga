@@ -29,7 +29,7 @@ function handleSearch() {
 </script>
 
 <template>
-    <div class="d-flex gap-2 mb-3 align-items-end">
+    <div class="d-flex gap-2 mb-3 align-items-end bg-secondary-subtle p-2 rounded">
 
         <div class="">
             <label for="" class="form-label">Munka éve</label>

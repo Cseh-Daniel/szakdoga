@@ -62,7 +62,12 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+        if ($comment->user_id == auth()->user()->id) {
+            $req = $request->validate(comment::$updateRules);
+            $comment['text'] = $req['text'];
+            $comment->save();
+            return redirect("/posts/" . $comment->post_id);
+        }
     }
 
     /**

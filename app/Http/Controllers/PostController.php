@@ -89,9 +89,6 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         if ($post->user_id == auth()->user()->id) {
-            // dd("update van if ágban");
-
-            // dd('update post', $post, $request);
             $req = $request->validate(Post::$updateRules);
             $post['text'] = $req['text'];
             $post->save();
