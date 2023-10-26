@@ -3,6 +3,8 @@
 namespace App\Traits;
 
 use App\Models\Post;
+use App\Models\County;
+use App\Models\Profession;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -17,7 +19,7 @@ trait PostListTrait
 
         $posts = $posts != null ? $posts->with('user')->with('profession')->with('county') : Post::with('user')->with('profession')->with('county');
         $posts = $sort != null ? $this->sortPosts($posts, $sort) : $this->sortPosts($posts);
-        return inertia('index', ['posts' => $posts->paginate(5)->withQueryString()]);
+        return inertia('index', ['posts' => $posts->paginate(5)->withQueryString(),'counties'=>County::all(),'professions'=>Profession::all()]);
     }
 
     protected function isSorted()

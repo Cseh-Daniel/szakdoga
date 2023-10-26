@@ -1,5 +1,4 @@
 <script setup>
-// import { defineProps } from 'vue';
 import { router } from '@inertiajs/vue3';
 
 const props = defineProps(['post']);
@@ -30,9 +29,7 @@ function filterPosts(name,value) {
         </div>
 
         <div class="text-black-50 badge bg-info tagLink" @click="filterPosts('profession',post.profession.id)">
-            <!-- <a class="text-decoration-none text-black-50" :href="'/posts/filter/profession/' + post.profession.id"> -->
                 {{ post.profession.name }}
-            <!-- </a> -->
         </div>
 
         <div class="text-black-50 badge bg-info tagLink" @click="filterPosts('inYear',post.year)">{{ post.year }}</div>

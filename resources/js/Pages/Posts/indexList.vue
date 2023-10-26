@@ -4,16 +4,14 @@ const props = defineProps(['posts']);
 </script>
 
 <template>
-    <div class="d-flex flex-column justify-content-center shadow-sm w-90 p-3 m-auto rounded-3 border border-top-0">
-        <!-- List element -->
-
+    <div class="d-flex flex-column justify-content-center w-90 shadow-sm p-3 m-auto rounded-3 border border-top-0">
         <div v-for="post in props.posts">
             <div class="d-flex flex-row align-items-center justify-content-between">
                 <span class="">
                     <Link class="fs-3 text-black text-decoration-none fw-bold" :href="'/posts/' + post.id">
                     {{ post.title }}<br>
                     </Link>
-                    {{ post.created_at.substr(0,19).replace('T',' ') }}
+                    {{ post.created_at.substr(0, 19).replace('T', ' ') }}
                 </span>
                 <span class="fs-6">
                     {{ post.user.name }}

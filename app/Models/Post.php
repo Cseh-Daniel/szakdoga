@@ -61,7 +61,7 @@ class Post extends Model
         $query->where('profession_id', $id);
     }
 
-    public function scopeByJobType(Builder $query, Bool $type): void
+    public function scopeByJobType(Builder $query, ?Bool $type): void
     {
         $query->where('trainee', $type);
     }
