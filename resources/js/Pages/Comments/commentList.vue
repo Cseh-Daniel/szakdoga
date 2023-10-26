@@ -42,7 +42,7 @@ function formSubmit(){
                     <button type="submit" class="btn btn-primary">Küldés</button>
                 </form>
 
-                <commentEntry v-if="props.comments" v-for="comment in props.comments" :name="comment.user.name">{{ comment.text }}</commentEntry>
+                <commentEntry v-if="props.comments" v-for="comment in props.comments" :name="comment.user.name" :editable="props.editable" :id="comment.id" :key="comment.id">{{ comment.text }}</commentEntry>
                 <div v-else>Még nincs hozzászólás</div>
 
             </div>
