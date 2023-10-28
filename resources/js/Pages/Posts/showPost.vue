@@ -10,16 +10,7 @@ import {isEditable} from '../../Shared/isEditable.js';
 
 
 const post = usePage().props.post;
-
-// let authName="";
-// if (usePage().props.auth.user != null) {
-//     authName = usePage().props.auth.user.username
-// }else{
-//     authName='guest';
-// }
-// const editable = authName == post.user.name;
-
-const editable = isEditable(post.user.name);
+const editable = isEditable(post.user.id);
 
 const form = useForm({
     text: `${post.text}`

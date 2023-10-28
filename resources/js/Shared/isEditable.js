@@ -1,20 +1,20 @@
 import { usePage } from "@inertiajs/vue3";
 
-function isEditable(name){
+function isEditable(id) {
 
-    let authName="";
+    let authId = "";
     if (usePage().props.auth.user != null) {
-        authName = usePage().props.auth.user.username
-    }else{
-        authName='guest';
+        authId = usePage().props.auth.user.id
+    } else {
+        authId = 0;
     }
 
-    if(name == authName){
+    if (id == authId) {
         return true;
-    }else{
+    } else {
         return false;
     }
 
 }
 
-export{isEditable}
+export { isEditable }
