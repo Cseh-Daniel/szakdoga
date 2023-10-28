@@ -28,7 +28,7 @@ function sorter() {
         <Link href="/posts/create" as="button" class="btn btn-primary p-2 h-50 mb-3 me-2">
         <i class="bi bi-pen-fill"></i>
         Bejegyzés írása
-        </Link>
+    </Link>
 
         <div class="mb-3">
             <select v-model="sort" @change="sorter" class="form-select form-select-lg">
