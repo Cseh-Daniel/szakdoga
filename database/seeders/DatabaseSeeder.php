@@ -12,56 +12,75 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+
+        $counties = [
+            'Bács-Kiskun',
+            'Baranya',
+            'Békés',
+            'Borsod-Abaúj-Zemplén',
+            'Csongrád-Csanád',
+            'Fejér',
+            'Győr-Moson-Sopron',
+            'Hajdú-Bihar',
+            'Heves',
+            'Jász-Nagykun-Szolnok',
+            'Komárom-Esztergom',
+            'Nógrád',
+            'Pest',
+            'Somogy',
+            'Szabolcs-Szatmár-Bereg',
+            'Tolna',
+            'Vas',
+            'Veszprém',
+            'Zala',
+        ];
+
+        $professions = [
+            'Agrár',
+            'Államtudományi',
+            'Bölcsészettudomány',
+            'Gazdaságtudományok',
+            'Hitéleti',
+            'Informatika',
+            'Jogi',
+            'Műszaki',
+            'Művészet',
+            'Művészetközvetítés',
+            'Orvos- és egészségtudomány',
+            'Pedagógusképzés',
+            'Sporttudomány',
+            'Társadalomtudomány',
+            'Természettudomány',
+        ];
+
+        $roles = [
+            'admin',
+            'member',
+            'guest',
+        ];
+
+        foreach ($counties as $county) {
+            \App\Models\County::create(['name' => $county]);
+        }
+
+        foreach ($professions as $profession) {
+            \App\Models\Profession::create(['name' => $profession]);
+        }
+
+        foreach ($roles as $role) {
+            \App\Models\Role::create(['name' => $role]);
+        }
 
         \App\Models\User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@user.com',
+            'role_id' => 2,
         ]);
 
-        $counties=['Bács-Kiskun',
-        'Baranya',
-        'Békés',
-        'Borsod-Abaúj-Zemplén',
-        'Csongrád-Csanád',
-        'Fejér',
-        'Győr-Moson-Sopron',
-        'Hajdú-Bihar',
-        'Heves',
-        'Jász-Nagykun-Szolnok',
-        'Komárom-Esztergom',
-        'Nógrád',
-        'Pest',
-        'Somogy',
-        'Szabolcs-Szatmár-Bereg',
-        'Tolna',
-        'Vas',
-        'Veszprém',
-        'Zala',];
-
-        $professions=['Agrár',
-        'Államtudományi',
-        'Bölcsészettudomány',
-        'Gazdaságtudományok',
-        'Hitéleti',
-        'Informatika',
-        'Jogi',
-        'Műszaki',
-        'Művészet',
-        'Művészetközvetítés',
-        'Orvos- és egészségtudomány',
-        'Pedagógusképzés',
-        'Sporttudomány',
-        'Társadalomtudomány',
-        'Természettudomány',];
-
-        foreach($counties as $county){
-            \App\Models\County::create(['name'=>$county]);
-        }
-
-        foreach($professions as $profession){
-            \App\Models\Profession::create(['name'=>$profession]);
-        }
-
+        \App\Models\User::factory()->create([
+            'name' => 'Admin User',
+            'email' => 'admin@user.com',
+            'role_id' => 1,
+        ]);
     }
 }
