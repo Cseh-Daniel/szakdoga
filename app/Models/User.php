@@ -12,6 +12,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+
+    protected $attributes=[
+        'role_id'=>2
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -25,7 +30,8 @@ class User extends Authenticatable
 
     protected $visible=[
         'name',
-        'id'
+        'id',
+        'role_id',
     ];
 
     /**
