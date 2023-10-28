@@ -62,7 +62,7 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        if ($comment->user_id == auth()->user()->id) {
+        if ($comment->user_id == auth()->user()->id || auth()->user()->role_id == 1) {
             $req = $request->validate(comment::$updateRules);
             $comment['text'] = $req['text'];
             $comment->save();
@@ -75,7 +75,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        if ($comment->user_id == auth()->user()->id) {
+        if ($comment->user_id == auth()->user()->id || auth()->user()->role_id == 1) {
             $comment->delete();
         }
         return redirect('/posts/'.$comment->post_id);
