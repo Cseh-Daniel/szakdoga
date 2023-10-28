@@ -1,6 +1,6 @@
 <script setup>
 import { router } from '@inertiajs/vue3';
-import indexList from './Posts/indexList.vue';
+import postList from './Posts/postList.vue';
 import pagination from '../Shared/pagination.vue';
 import { ref } from 'vue';
 
@@ -41,7 +41,7 @@ function sorter() {
     </div>
 
 
-    <indexList :posts="$page.props.posts.data"></indexList>
+    <postList :posts="$page.props.posts.data"></postList>
 
     <div class="d-flex justify-content-center align-items-center">
         <pagination :links="$page.props.posts.links"></pagination>
