@@ -45,11 +45,11 @@ class Post extends Model
         'user_id',
     ];
 
-    public function scopeByColId(Builder $query, string $col, int $id): void
-    {
-        //for County and Profession cuz they are the same
-        $query->where($col, $id);
-    }
+    // public function scopeByColId(Builder $query, string $col, int $id): void
+    // {
+    //     //for County and Profession cuz they are the same
+    //     $query->where($col, $id);
+    // }
 
     public function scopeByCounty(Builder $query, int $id): void
     {
