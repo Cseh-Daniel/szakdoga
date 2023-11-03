@@ -6,7 +6,7 @@ const props = defineProps(['name', 'comment']);
 
 import { isEditable } from '../../Shared/isEditable';
 
-const editable = isEditable(props.comment.user.name);
+const editable = isEditable(props.comment.user.id);
 
 
 let deleteComment = ref(false);

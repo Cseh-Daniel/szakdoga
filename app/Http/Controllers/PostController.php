@@ -88,7 +88,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        if ($post->user_id == auth()->user()->id) {
+        if ($post->user_id == auth()->user()->id || auth()->user()->role_id == 1) {
             $req = $request->validate(Post::$updateRules);
             $post['text'] = $req['text'];
             $post->save();
@@ -101,8 +101,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        // dd($post);
-        if ($post->user_id == auth()->user()->id) {
+        if ($post->user_id == auth()->user()->id || auth()->user()->role_id == 1) {
             $post->delete();
         }
         return redirect('home');

@@ -12,6 +12,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+
+    protected $attributes=[
+        'role_id'=>2
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -24,7 +29,9 @@ class User extends Authenticatable
     ];
 
     protected $visible=[
-        'name'
+        'name',
+        'id',
+        'role_id',
     ];
 
     /**
@@ -32,14 +39,10 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
     protected $hidden = [
         'password',
         'remember_token',
-        // 'created_at',
-        // 'email',
-        // 'email_verified_at',
-        // 'updated_at',
-        // 'id'
     ];
 
     /**
@@ -58,6 +61,10 @@ class User extends Authenticatable
 
     public function comments(){
         return $this->hasMany(Comment::class);
+    }
+
+    public function role(){
+        return $this->belongsTo(Role::class);
     }
 
 }
