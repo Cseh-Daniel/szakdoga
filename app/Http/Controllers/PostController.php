@@ -28,7 +28,6 @@ class PostController extends Controller
     public function index()
     {
 
-        // return inertia('index', ['posts' => Post::with('user')->with('profession')->with('county')->paginate(7)]);
         return $this->showPosts();
     }
 
