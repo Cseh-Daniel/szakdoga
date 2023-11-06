@@ -21,7 +21,7 @@ class FilterController extends Controller
             'jobType' => ['nullable', 'bool'],
             'county' => ['nullable', 'exists:counties,id'],
             'profession' => ['nullable', 'exists:professions,id'],
-            'title' => ['nullable']
+            'title' => ['nullable'],
         ]);
 
         $posts = Post::query();
@@ -58,11 +58,11 @@ class FilterController extends Controller
                     break;
 
                 case 'title':
-                    $posts = $posts->where('title', 'like', "%" . $value . "%");
+                    $posts = $posts->where('title', 'like', '%'.$value.'%');
                     break;
 
                 default:
-                    return redirect("/home");
+                    return redirect('/home');
                     break;
             }
         }

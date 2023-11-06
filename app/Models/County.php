@@ -11,7 +11,7 @@ class County extends Model
 
     protected $visible = [
         'id',
-        'name'
+        'name',
     ];
 
     public function posts()

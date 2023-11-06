@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
-use Auth;
+use App\Models\County;
 use App\Models\Post;
 use App\Models\Profession;
-use App\Models\County;
 use App\Models\User;
 use App\Traits\PostListTrait;
-use Inertia\Inertia;
-use Illuminate\Http\Request;
+use Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -36,7 +35,7 @@ class PostController extends Controller
      */
     public function create(): \Inertia\Response
     {
-        return inertia("Posts/newPost", ['professions' => Profession::all(['id', 'name']), 'counties' => County::all(['id', 'name'])]);
+        return inertia('Posts/newPost', ['professions' => Profession::all(['id', 'name']), 'counties' => County::all(['id', 'name'])]);
     }
 
     /**
@@ -50,11 +49,11 @@ class PostController extends Controller
 
         $post['user_id'] = Auth::user()->id;
 
-        $post['duration'] = $post['duration'] . " " . $durationType[$post['durationType']];
+        $post['duration'] = $post['duration'].' '.$durationType[$post['durationType']];
         // dd($post);
         $post = Post::create($post);
         //  a főoldal helyett a bejegyzés saját oldalára is dobhatna /posts/{id}
-        return redirect("/posts/" . $post->id);
+        return redirect('/posts/'.$post->id);
     }
 
     /**
@@ -69,7 +68,7 @@ class PostController extends Controller
         $comments = Comment::byPost($post['id'])->with('user')->get();
         // ddd($post);
         // $post['author'] = User::find($post['user_id'])['name'];
-        return inertia("Posts/showPost", ['post' => $post, 'comments' => $comments]);
+        return inertia('Posts/showPost', ['post' => $post, 'comments' => $comments]);
     }
 
     /**
@@ -91,7 +90,8 @@ class PostController extends Controller
             $req = $request->validate(Post::$updateRules);
             $post['text'] = $req['text'];
             $post->save();
-            return redirect("/posts/" . $post->id);
+
+            return redirect('/posts/'.$post->id);
         }
     }
 
@@ -103,6 +103,7 @@ class PostController extends Controller
         if ($post->user_id == auth()->user()->id || auth()->user()->role_id == 1) {
             $post->delete();
         }
+
         return redirect('home');
     }
 }

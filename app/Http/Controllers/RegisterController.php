@@ -24,11 +24,11 @@ class RegisterController extends Controller
         $credentials = $request->validate([
             'name' => ['required', 'min:8'],
             'email' => ['required', 'unique:users,email', 'email'],
-            'password' => ['required', 'min:8', 'confirmed']
+            'password' => ['required', 'min:8', 'confirmed'],
         ]);
         User::create($credentials);
 
-        return redirect("/home")->with("reg_ok", 'Sikeres regisztráció!');
+        return redirect('/home')->with('reg_ok', 'Sikeres regisztráció!');
     }
 
     /**
