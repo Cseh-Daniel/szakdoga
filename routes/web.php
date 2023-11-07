@@ -7,8 +7,6 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
-//delete comments and post
-//userpage password change ?profpic?
 
 Route::redirect('/', '/home');
 Route::redirect('/posts', '/home');

@@ -28,14 +28,7 @@ class RegisterController extends Controller
         ]);
         User::create($credentials);
 
-        return redirect('/home')->with('reg_ok', 'Sikeres regisztráció!');
+        return redirect('/login')->with('reg_ok', 'Sikeres regisztráció!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
