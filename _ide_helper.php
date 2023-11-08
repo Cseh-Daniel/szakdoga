@@ -18396,42 +18396,7 @@
      
 }
 
-        namespace Andyabih\LaravelToUML\Facades { 
-            /**
-     * 
-     *
-     */ 
-        class LaravelToUML {
-                    /**
-         * Create a new instance of the Laravel to UML.
-         *
-         * @return \Andyabih\LaravelToUML 
-         * @static 
-         */ 
-        public static function create()
-        {
-                        /** @var \Andyabih\LaravelToUML\LaravelToUML $instance */
-                        return $instance->create();
-        }
-                    /**
-         * Turn the classes array into a nomnoml schema.
-         * 
-         * https://github.com/skanaar/nomnoml
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getSource()
-        {
-                        /** @var \Andyabih\LaravelToUML\LaravelToUML $instance */
-                        return $instance->getSource();
-        }
-         
-    }
-     
-}
-
-    namespace Spatie\LaravelIgnition\Facades { 
+        namespace Spatie\LaravelIgnition\Facades { 
             /**
      * 
      *
@@ -22916,7 +22881,6 @@ namespace  {
             class Validator extends \Illuminate\Support\Facades\Validator {}
             class View extends \Illuminate\Support\Facades\View {}
             class Vite extends \Illuminate\Support\Facades\Vite {}
-            class LaravelToUML extends \Andyabih\LaravelToUML\Facades\LaravelToUML {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
      
 }
