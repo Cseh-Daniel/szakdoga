@@ -17,6 +17,7 @@ Route::get('/home', [PostController::class, 'index'])->name('home');
 
 Route::resource('posts', PostController::class);
 
+
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'authenticate']);
@@ -27,4 +28,7 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LoginController::class, 'logout']);
     Route::resource('/comments', CommentController::class);
+    Route::get('/email/verify', [RegisterController::class, 'verifyNotice'])->name('verification.notice');
+    Route::get('/email/verify/{id}/{hash}', [RegisterController::class,'verify'])->middleware('signed')->name('verification.verify');
+    Route::post('/email/verification-notification', [RegisterController::class,'sendVerificationNotification'])->middleware('throttle:6,1')->name('verification.send');
 });
