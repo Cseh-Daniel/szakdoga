@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -13,7 +13,7 @@ class LoginController extends Controller
      */
     public function index()
     {
-        return inertia("Auth/login");
+        return inertia('Auth/login');
     }
 
     /**
@@ -24,7 +24,7 @@ class LoginController extends Controller
 
         $credentials = $request->validate([
             'email' => ['required', 'email'],
-            'password' => ['required','min:8'],
+            'password' => ['required', 'min:8'],
         ]);
 
         if (Auth::attempt($credentials)) {
@@ -41,7 +41,6 @@ class LoginController extends Controller
     /**
      * Logging out the logged in user
      */
-
     public function logout(Request $request): RedirectResponse
     {
         Auth::logout();

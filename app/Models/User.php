@@ -12,9 +12,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-
-    protected $attributes=[
-        'role_id'=>2
+    protected $attributes = [
+        'role_id' => 2,
     ];
 
     /**
@@ -28,7 +27,7 @@ class User extends Authenticatable
         'password',
     ];
 
-    protected $visible=[
+    protected $visible = [
         'name',
         'id',
         'role_id',
@@ -39,7 +38,6 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-
     protected $hidden = [
         'password',
         'remember_token',
@@ -55,16 +53,18 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function posts(){
+    public function posts()
+    {
         return $this->hasMany(Post::class);
     }
 
-    public function comments(){
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
 
-    public function role(){
+    public function role()
+    {
         return $this->belongsTo(Role::class);
     }
-
 }

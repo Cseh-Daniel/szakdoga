@@ -9,9 +9,9 @@ class Profession extends Model
 {
     use HasFactory;
 
-    protected $visible=[
+    protected $visible = [
         'name',
-        'id'
+        'id',
     ];
 
     public function posts()

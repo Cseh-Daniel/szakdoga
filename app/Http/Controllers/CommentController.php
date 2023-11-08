@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
-use Auth;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -31,13 +30,13 @@ class CommentController extends Controller
     {
 
         //link change to /posts/{id}/comment
-        $comment= $request->validate(Comment::$createRules);
+        $comment = $request->validate(Comment::$createRules);
 
         $comment['user_id'] = auth()->user()->id;
         // dd($comment);
-        $comment=Comment::create($comment);
-        return redirect("/posts/".$comment->post_id);
+        $comment = Comment::create($comment);
 
+        return redirect('/posts/'.$comment->post_id);
 
     }
 
@@ -66,7 +65,8 @@ class CommentController extends Controller
             $req = $request->validate(comment::$updateRules);
             $comment['text'] = $req['text'];
             $comment->save();
-            return redirect("/posts/" . $comment->post_id);
+
+            return redirect('/posts/'.$comment->post_id);
         }
     }
 
@@ -78,6 +78,7 @@ class CommentController extends Controller
         if ($comment->user_id == auth()->user()->id || auth()->user()->role_id == 1) {
             $comment->delete();
         }
+
         return redirect('/posts/'.$comment->post_id);
     }
 }

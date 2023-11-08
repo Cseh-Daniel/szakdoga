@@ -79,7 +79,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'Admin User',
             'email' => 'admin@user.com',
-            'role_id' => 1
+            'role_id' => 1,
         ]);
     }
 }

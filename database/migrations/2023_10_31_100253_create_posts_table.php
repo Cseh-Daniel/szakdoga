@@ -13,7 +13,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('title', 61);
-            $table->string('text',3000);
+            $table->string('text', 3000);
             $table->boolean('trainee');
             $table->foreignId('profession_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('year');
