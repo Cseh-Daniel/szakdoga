@@ -43,12 +43,11 @@ class PostController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $durationType = ['óra', 'nap', 'hét', 'hónap'];
         $post = $request->validate(Post::$createRules);
 
         $post['user_id'] = Auth::user()->id;
 
-        $post['duration'] = $post['duration'].' '.$durationType[$post['durationType']];
+        $post['duration'] = $post['duration'].' '.config('durationTypes')[$post['durationType']];
         $post = Post::create($post);
         return redirect('/posts/'.$post->id);
     }
@@ -69,7 +68,6 @@ class PostController extends Controller
      */
     public function edit()
     {
-
         abort(404);
     }
 
