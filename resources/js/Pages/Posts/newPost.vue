@@ -69,9 +69,9 @@ function saveForm() {
                         </select>
                     </div>
 
-                    <div v-if="$page.props.errors.profession"
-                        class="p-1 rounded-bottom-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle">
-                        {{ $page.props.errors.profession }}
+                    <div v-if="$page.props.errors.profession_id"
+                        class="p-1 rounded-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle">
+                        {{ $page.props.errors.profession_id }}
                     </div>
                 </div>
 
@@ -86,9 +86,9 @@ function saveForm() {
                         </select>
                     </div>
 
-                    <div v-if="$page.props.errors.county"
-                        class="p-1 rounded-bottom-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle">
-                        {{ $page.props.errors.county }}
+                    <div v-if="$page.props.errors.county_id"
+                        class="p-1 rounded-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle">
+                        {{ $page.props.errors.county_id }}
                     </div>
                 </div>
 
