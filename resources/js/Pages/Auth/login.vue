@@ -19,7 +19,13 @@ export default {
 
 
 <template>
+    <div v-if="$page.props.flash.data" class="alert alert-success w-50 m-auto text-center fs-5" role="alert">
+        {{ $page.props.flash.data }}
+    </div>
     <div class="d-flex vh-100">
+
+
+
         <div class="border w-50 m-auto p-3 rounded-5">
             <h2 class="text-center">Bejelentkezés</h2>
 

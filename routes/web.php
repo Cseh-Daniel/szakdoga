@@ -28,7 +28,8 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LoginController::class, 'logout']);
     Route::resource('/comments', CommentController::class);
-    Route::get('/email/verify', [RegisterController::class, 'verifyNotice'])->name('verification.notice');
-    Route::get('/email/verify/{id}/{hash}', [RegisterController::class,'verify'])->middleware('signed')->name('verification.verify');
-    Route::post('/email/verification-notification', [RegisterController::class,'sendVerificationNotification'])->middleware('throttle:6,1')->name('verification.send');
+
+    Route::get('/email/verify', [RegisterController::class, 'verificationNotice'])->name('verification.notice');
+    Route::get('/email/verify/{id}/{hash}', [RegisterController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');
+    Route::post('/email/resend-verification', [RegisterController::class, 'resendVerification'])->middleware('throttle:6,1')->name('verification.send');
 });
