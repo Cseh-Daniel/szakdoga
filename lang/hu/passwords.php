@@ -17,6 +17,6 @@ return [
     'sent' => 'We have emailed your password reset link.',
     'throttled' => 'Please wait before retrying.',
     'token' => 'This password reset token is invalid.',
-    'user' => "Nem található felhasználó a megadott e-mail címmel.",
+    'user' => 'Nem található felhasználó a megadott e-mail címmel.',
 
 ];

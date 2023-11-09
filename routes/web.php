@@ -7,7 +7,6 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::redirect('/', '/home');
 Route::redirect('/posts', '/home');
 
@@ -16,7 +15,6 @@ Route::get('/posts/filter', [FilterController::class, 'index']);
 Route::get('/home', [PostController::class, 'index'])->name('home');
 
 Route::resource('posts', PostController::class);
-
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');

@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-
 use App\Models\User;
-use Inertia\Inertia;
-use Illuminate\Http\Request;
+use Auth;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -38,14 +35,13 @@ class RegisterController extends Controller
         event(new Registered($user));
 
         //ezt lehet, hogy lekell cserélni hogy az email megerősítésről szóljon
-        return redirect()->route('login')->with('data','Sikeres regisztráció! Megerősítő e-mail elküldve.');
+        return redirect()->route('login')->with('data', 'Sikeres regisztráció! Megerősítő e-mail elküldve.');
     }
-
 
     public function verificationNotice()
     {
 
-        if (!Auth::user()->hasVerifiedEmail()) {
+        if (! Auth::user()->hasVerifiedEmail()) {
             return inertia('Auth/verifyEmail');
         } else {
             return redirect()->route('home');
@@ -55,12 +51,13 @@ class RegisterController extends Controller
     public function verifyEmail(EmailVerificationRequest $request)
     {
         $request->fulfill();
+
         return redirect('/home');
     }
 
     public function resendVerification()
     {
-        if (!Auth::user()->hasVerifiedEmail()) {
+        if (! Auth::user()->hasVerifiedEmail()) {
             event(new Registered(Auth::user()));
         } else {
             return redirect()->route('home');

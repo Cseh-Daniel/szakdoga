@@ -27,10 +27,10 @@ class AuthServiceProvider extends ServiceProvider
         VerifyEmail::toMailUsing(function (object $notifiable, string $url) {
 
             return (new MailMessage)
-            ->subject('E-mail cím megerősítése')
-            ->greeting('Üdvözlöm!')
-            ->line('Kérem kattintson az alábbi gombra az e-mail cím megerősítéséhez.')
-            ->action('E-mail megerősítése', $url);
+                ->subject('E-mail cím megerősítése')
+                ->greeting('Üdvözlöm!')
+                ->line('Kérem kattintson az alábbi gombra az e-mail cím megerősítéséhez.')
+                ->action('E-mail megerősítése', $url);
 
         });
     }

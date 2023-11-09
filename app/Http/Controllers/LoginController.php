@@ -32,7 +32,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return (!Auth::user()->hasVerifiedEmail())?redirect()->route('verification.notice'):redirect()->intended('home');
+            return (! Auth::user()->hasVerifiedEmail()) ? redirect()->route('verification.notice') : redirect()->intended('home');
             // return redirect()->intended('home');
 
         }
