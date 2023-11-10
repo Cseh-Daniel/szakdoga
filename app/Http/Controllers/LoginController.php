@@ -14,6 +14,7 @@ class LoginController extends Controller
      */
     public function index()
     {
+
         return inertia('Auth/login');
     }
 
@@ -30,9 +31,10 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            User::whereEmail($request['email'])->first();
 
-            return redirect()->intended('home');
+            return (! Auth::user()->hasVerifiedEmail()) ? redirect()->route('verification.notice') : redirect()->intended('home');
+            // return redirect()->intended('home');
+
         }
 
         return back()->withErrors([

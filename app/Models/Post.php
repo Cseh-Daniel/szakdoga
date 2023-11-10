@@ -44,12 +44,6 @@ class Post extends Model
         'user_id',
     ];
 
-    // public function scopeByColId(Builder $query, string $col, int $id): void
-    // {
-    //     //for County and Profession cuz they are the same
-    //     $query->where($col, $id);
-    // }
-
     public function scopeByCounty(Builder $query, int $id): void
     {
         $query->where('county_id', $id);
@@ -67,7 +61,6 @@ class Post extends Model
 
     public function scopeByRemote(Builder $query, ?bool $type): void
     {
-        // $type = ($type == false || $type == null) ? 'false OR null' : true;
         if ($type) {
             $query->where('remote', true);
         } else {
@@ -104,4 +97,5 @@ class Post extends Model
     {
         return $this->belongsTo(Profession::class);
     }
+
 }

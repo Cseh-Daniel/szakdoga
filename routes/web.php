@@ -7,7 +7,6 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::redirect('/', '/home');
 Route::redirect('/posts', '/home');
 
@@ -16,7 +15,6 @@ Route::get('/posts/filter', [FilterController::class, 'index']);
 Route::get('/home', [PostController::class, 'index'])->name('home');
 
 Route::resource('posts', PostController::class);
-
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -28,7 +26,8 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LoginController::class, 'logout']);
     Route::resource('/comments', CommentController::class);
-    Route::get('/email/verify', [RegisterController::class, 'verifyNotice'])->name('verification.notice');
-    Route::get('/email/verify/{id}/{hash}', [RegisterController::class,'verify'])->middleware('signed')->name('verification.verify');
-    Route::post('/email/verification-notification', [RegisterController::class,'sendVerificationNotification'])->middleware('throttle:6,1')->name('verification.send');
+
+    Route::get('/email/verify', [RegisterController::class, 'verificationNotice'])->name('verification.notice');
+    Route::get('/email/verify/{id}/{hash}', [RegisterController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');
+    Route::post('/email/resend-verification', [RegisterController::class, 'resendVerification'])->middleware('throttle:6,1')->name('verification.send');
 });

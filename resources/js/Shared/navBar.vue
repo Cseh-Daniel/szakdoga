@@ -15,7 +15,7 @@
         </div>
 
         <div v-else class="flex-row-reverse p-2">
-            <span class="border-end border-dark-subtle p-2">{{ $page.props.auth.user.name}}</span>
+            <span class="border-end border-dark-subtle p-2">{{ $page.props.auth.user.name }}</span>
             <Link href="/logout" as="button" class="btn btn-outline-secondary ms-2" method="post">
             Kijelentkezés
             </Link>

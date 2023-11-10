@@ -6,7 +6,6 @@ use App\Models\Comment;
 use App\Models\County;
 use App\Models\Post;
 use App\Models\Profession;
-use App\Models\User;
 use App\Traits\PostListTrait;
 use Auth;
 use Illuminate\Http\RedirectResponse;
@@ -49,6 +48,7 @@ class PostController extends Controller
 
         $post['duration'] = $post['duration'].' '.config('durationTypes')[$post['durationType']];
         $post = Post::create($post);
+
         return redirect('/posts/'.$post->id);
     }
 
@@ -60,6 +60,7 @@ class PostController extends Controller
         $post = Post::with('user')->with('profession')->with('county')->find($id);
 
         $comments = Comment::byPost($post['id'])->with('user')->get();
+
         return inertia('Posts/showPost', ['post' => $post, 'comments' => $comments]);
     }
 
