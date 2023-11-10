@@ -4,7 +4,7 @@ const props = defineProps(['posts']);
 </script>
 
 <template>
-    <div class="d-flex flex-column justify-content-center w-90 shadow-sm p-3 m-auto rounded-3 border border-top-0">
+    <div class="d-flex flex-column justify-content-center mx-5 shadow-sm p-3 m-auto rounded-3 border border-top-0">
         <div v-for="post in props.posts">
             <div class="d-flex flex-row align-items-center justify-content-between">
                 <span class="">
