@@ -4,7 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Post;
 use App\Models\User;
+use App\Models\Comment;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -73,18 +75,27 @@ class DatabaseSeeder extends Seeder
             \App\Models\Role::create(['name' => $role]);
         }
 
-        \App\Models\User::factory()->create([
+        User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@user.com',
         ]);
 
-        \App\Models\User::factory()->create([
+        User::factory()->create([
             'name' => 'Admin User',
             'email' => 'admin@user.com',
             'role_id' => 1,
         ]);
 
         User::factory()->count(10)->create();
+
+        // $this->call([
+        //     PostSeeder::class,
+        // ]);
+
+        //User::count()-1 vissza adja mennyi felhasználó van.
+        Post::factory()->count(15)->create();
+        Comment::factory()->count(30)->create();
+
 
     }
 }
