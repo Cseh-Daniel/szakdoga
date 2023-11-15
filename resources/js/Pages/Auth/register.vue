@@ -58,7 +58,7 @@ export default {
 
                     <div class="d-flex flex-row gap-3 p-2 mt-2 align-items-center">
                         <button class="btn btn-primary" type="submit">
-                            Register
+                            Regisztráció
                         </button>
                         <div class="p-2 border-dark-subtle border-start">
                             Van már fiókja?<Link href="/login" class="p-1">Lépjen be!</Link>

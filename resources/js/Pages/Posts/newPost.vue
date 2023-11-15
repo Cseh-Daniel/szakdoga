@@ -1,7 +1,6 @@
 
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import { ref } from 'vue';
 
 const form = useForm({
 
@@ -17,12 +16,8 @@ const form = useForm({
     county_id: ''
 
 });
-// let duration = ref('');
-// let durationType = ref('');
 
 function saveForm() {
-
-    // form.duration = duration.value + " " + durationType.value;
 
     form.post('/posts');
 }
@@ -36,7 +31,6 @@ function saveForm() {
 
         <form @submit.prevent="saveForm">
 
-            <!-- form input component -->
             <div class="my-2">
                 <input required class="form-control" type="text" v-model="form.title" placeholder="Cím">
                 <div v-if="$page.props.errors.title"
@@ -45,7 +39,6 @@ function saveForm() {
                 </div>
             </div>
 
-            <!-- form input component -->
             <div class="my-2">
                 <textarea required class="form-control" rows="3" v-model="form.text" placeholder="Szöveg"></textarea>
                 <div v-if="$page.props.errors.text"
@@ -53,12 +46,10 @@ function saveForm() {
                     {{ $page.props.errors.text }}
                 </div>
             </div>
-            <!-- //----------------------------------------------------- -->
+
             <div class="d-flex gap-2 my-2">
 
                 <div>
-                    <!-- <input required class="form-control" type="text" v-model="form.profession" placeholder="Szakterület"> -->
-
                     <div class="mb-2">
                         <label class="form-label">Szakterület</label>
                         <select v-model="form.profession_id" class="form-select form-select-lg">
@@ -76,10 +67,9 @@ function saveForm() {
                 </div>
 
                 <div>
-                    <!-- <input required class="form-control" type="text" v-model="form.profession" placeholder="Szakterület"> -->
 
                     <div class="mb-2">
-                        <label class="form-label">Megye</label>
+                        <label class="form-label">Vármegye</label>
                         <select v-model="form.county_id" class="form-select form-select-lg">
                             <option value="" selected :disabled="true">Válaszon</option>
                             <option v-for="county in $page.props.counties" :value="county.id">{{ county.name }}</option>
@@ -163,7 +153,7 @@ function saveForm() {
 
 
 
-            <button type="submit" class="btn btn-primary my-2">Submit</button>
+            <button type="submit" class="btn btn-primary my-2">Létrehozás</button>
 
         </form>
 

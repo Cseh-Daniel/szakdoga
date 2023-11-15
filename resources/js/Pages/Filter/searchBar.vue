@@ -55,7 +55,7 @@ function handleSearch() {
         </div>
 
         <div>
-            <label class="form-label">Megye</label>
+            <label class="form-label">Vármegye</label>
             <select v-model="search.county" class="form-select form-select">
                 <option value="" selected :disabled="true">Válaszon</option>
                 <option v-for="county in $page.props.counties" :value="county.id">{{ county.name }}</option>

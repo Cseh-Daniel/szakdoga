@@ -11,7 +11,6 @@ import navBar from './navBar.vue';
         <title>Student Jobs</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
     </Head>
 
     <body>
@@ -21,12 +20,9 @@ import navBar from './navBar.vue';
             <slot></slot>
         </div>
 
-        <!-- --------------------------------------------------------------- -->
-
         <div class="d-flex justify-content-center ">
             <p class="text-muted"><sub>Made for students</sub></p>
         </div>
-        <!-- --------------------------------------------------------------- -->
 
     </body>
 
