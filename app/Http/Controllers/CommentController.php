@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-
-
     /**
      * Store a newly created resource in storage.
      */
@@ -22,7 +20,7 @@ class CommentController extends Controller
         // dd($comment);
         $comment = Comment::create($comment);
 
-        return redirect('/posts/' . $comment->post_id);
+        return redirect('/posts/'.$comment->post_id);
     }
 
     /**
@@ -35,7 +33,7 @@ class CommentController extends Controller
             $comment['text'] = $req['text'];
             $comment->save();
 
-            return redirect('/posts/' . $comment->post_id);
+            return redirect('/posts/'.$comment->post_id);
         }
     }
 
@@ -48,6 +46,6 @@ class CommentController extends Controller
             $comment->delete();
         }
 
-        return redirect('/posts/' . $comment->post_id);
+        return redirect('/posts/'.$comment->post_id);
     }
 }

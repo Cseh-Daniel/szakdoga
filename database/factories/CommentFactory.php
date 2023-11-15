@@ -22,10 +22,9 @@ class CommentFactory extends Factory
 
             'user_id' => rand(1, User::count() - 1),
             'Post_id' => rand(1, Post::count() - 1),
-            'text' => "Hozzászólás " . $this->faker->realText(150),
+            'text' => 'Hozzászólás '.$this->faker->realText(150),
             'created_at' => now(),
             'updated_at' => now(),
-
 
         ];
     }

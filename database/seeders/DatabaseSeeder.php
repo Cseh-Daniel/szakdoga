@@ -4,9 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
-use App\Models\Comment;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -95,7 +95,6 @@ class DatabaseSeeder extends Seeder
         //User::count()-1 vissza adja mennyi felhasználó van.
         Post::factory()->count(15)->create();
         Comment::factory()->count(30)->create();
-
 
     }
 }
