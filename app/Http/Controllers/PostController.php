@@ -46,10 +46,10 @@ class PostController extends Controller
 
         $post['user_id'] = Auth::user()->id;
 
-        $post['duration'] = $post['duration'] . ' ' . config('durationTypes')[$post['durationType']];
+        $post['duration'] = $post['duration'].' '.config('durationTypes')[$post['durationType']];
         $post = Post::create($post);
 
-        return redirect('/posts/' . $post->id);
+        return redirect('/posts/'.$post->id);
     }
 
     /**
@@ -83,7 +83,7 @@ class PostController extends Controller
             ddd($post['text'], $req['text']);
             $post->save();
 
-            return redirect('/posts/' . $post->id);
+            return redirect('/posts/'.$post->id);
         }
     }
 
