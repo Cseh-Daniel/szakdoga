@@ -17,7 +17,7 @@ trait PostListTrait
         $posts = $posts != null ? $posts->with('user')->with('profession')->with('county') : Post::with('user')->with('profession')->with('county');
         $posts = $sort != null ? $this->sortPosts($posts, $sort) : $this->sortPosts($posts);
 
-        return inertia('index', ['posts' => $posts->paginate(2)->withQueryString(), 'counties' => County::all(), 'professions' => Profession::all()]);
+        return inertia('index', ['posts' => $posts->paginate(5)->withQueryString(), 'counties' => County::all(), 'professions' => Profession::all()]);
     }
 
     protected function isSorted()

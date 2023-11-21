@@ -33,7 +33,6 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             return (! Auth::user()->hasVerifiedEmail()) ? redirect()->route('verification.notice') : redirect()->intended('home');
-            // return redirect()->intended('home');
 
         }
 

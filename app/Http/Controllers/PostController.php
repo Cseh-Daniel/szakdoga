@@ -46,10 +46,10 @@ class PostController extends Controller
 
         $post['user_id'] = Auth::user()->id;
 
-        $post['duration'] = $post['duration'].' '.config('durationTypes')[$post['durationType']];
+        $post['duration'] = $post['duration'] . ' ' . config('durationTypes')[$post['durationType']];
         $post = Post::create($post);
 
-        return redirect('/posts/'.$post->id);
+        return redirect('/posts/' . $post->id);
     }
 
     /**
@@ -80,9 +80,10 @@ class PostController extends Controller
         if ($post->user_id == auth()->user()->id || auth()->user()->role_id == 1) {
             $req = $request->validate(Post::$updateRules);
             $post['text'] = $req['text'];
+            ddd($post['text'], $req['text']);
             $post->save();
 
-            return redirect('/posts/'.$post->id);
+            return redirect('/posts/' . $post->id);
         }
     }
 

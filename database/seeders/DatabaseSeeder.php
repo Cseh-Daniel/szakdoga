@@ -94,7 +94,7 @@ class DatabaseSeeder extends Seeder
 
         //User::count()-1 vissza adja mennyi felhasználó van.
         Post::factory()->count(15)->create();
-        Comment::factory()->count(30)->create();
+        Comment::factory()->count(100)->create();
 
     }
 }
