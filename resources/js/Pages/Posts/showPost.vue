@@ -34,7 +34,13 @@ function editPost() {
         <tagList :post="$page.props.post" />
 
 
-        <textarea v-model="form.text" :readonly="!isEditing" class="fs-5 rounded-2 form-control mb-2 p-4">{{ $page.props.post.text }}</textarea>
+        <textarea v-model="form.text" :readonly="!isEditing"
+            class="fs-5 rounded-2 form-control mb-2 p-4">{{ $page.props.post.text }}</textarea>
+
+        <div v-if="$page.props.errors.text"
+            class="p-1 rounded text-danger-emphasis bg-danger-subtle border border-danger-subtle mb-2">
+            {{ $page.props.errors.text }}
+        </div>
 
         <button v-if="isEditing" type="submit" class="mb-2 btn btn-sm btn-primary" @click="editPost()">Mentés</button>
 
